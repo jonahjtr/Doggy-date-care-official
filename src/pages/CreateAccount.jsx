@@ -1,7 +1,12 @@
 import React from "react";
+import CreateAccountForm from "../components/forms/CreateAccountForm";
 
 const CreateAccount = () => {
-  return <div>Create Account page</div>;
+  return (
+    <div>
+      <CreateAccountForm />
+    </div>
+  );
 };
 
 export default CreateAccount;

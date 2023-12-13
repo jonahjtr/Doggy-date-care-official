@@ -1,0 +1,73 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        email,
+        password,
+      });
+      console.log(response);
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+
+      // Redirect or perform additional actions after successful login
+      window.location.href = "/homepage";
+    } catch (error) {
+      console.log(error.response);
+      console.error("Login failed:", error.response);
+      setErrorMessage("Invalid email or password");
+    }
+  };
+
+  return (
+    <div className=" mr-18 min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="bg-white p-8 rounded shadow-md w-96">
+        <h2 className="text-2xl font-semibold mb-4">Login</h2>
+        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+        <form>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Email:
+            </label>
+            <input
+              type="email"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-600">
+              Password:
+            </label>
+            <input
+              type="password"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLogin}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+      <Link to={"/create-account"}> create account page here</Link>{" "}
+    </div>
+  );
+};
+
+export default LoginForm;
