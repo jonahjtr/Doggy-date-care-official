@@ -41,7 +41,7 @@ const CreateAccountForm = () => {
       );
       const token = response.data.token;
       localStorage.setItem("token", token);
-      window.location.href = "/homepage";
+      window.location.href = "/login";
     } catch (error) {
       console.error("Account creation failed:", error.response);
       setErrorMessage(

@@ -15,9 +15,9 @@ const LoginForm = () => {
       });
       console.log(response);
       const token = response.data.token;
+      localStorage.setItem("loggedIn", true);
       localStorage.setItem("token", token);
 
-      // Redirect or perform additional actions after successful login
       window.location.href = "/homepage";
     } catch (error) {
       console.log(error.response);
