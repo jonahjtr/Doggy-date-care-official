@@ -22,7 +22,7 @@ const LoginForm = () => {
     } catch (error) {
       console.log(error.response);
       console.error("Login failed:", error.response);
-      setErrorMessage("Invalid email or password");
+      setErrorMessage(`invalid email or password ${error}`);
     }
   };
 

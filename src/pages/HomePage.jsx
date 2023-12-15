@@ -1,12 +1,13 @@
 import HomePageFeed from "../components/HomePagefeed";
-import useAxios from "../hooks/useAxios";
+import useGetAxios from "../hooks/useGetAxios";
 const HomePage = () => {
-  const { data, error } = useAxios("/user/profile");
+  const { data, error } = useGetAxios("/user/profile");
 
   if (!data || error) return <div> no user data {error}</div>;
+  const dogData = data[0];
   return (
     <div className="border border-black bg-darkGreen h-full min-h-screen py-10 w-full">
-      <HomePageFeed list={data.dogs} />
+      <HomePageFeed list={dogData.dogs} />
     </div>
   );
 };
