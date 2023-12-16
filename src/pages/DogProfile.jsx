@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import useGetAxios from "../hooks/useGetAxios";
+import PhotoUpload from "../components/forms/PhotoUpload";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
-
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
+  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
   return (
     <div className="  bg-darkGreen  w-full h-full min-h-screen">
       <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px] px-6 mx-auto">
+        <div className="w-full h-500px">
+          <PhotoUpload />
+        </div>
         <section className="w-full h-[250px] lg:h-[350px]  rounded-xl   flex flex-col justify-evenly items-center  ">
           <div className=" w-[130px] h-[130px] lg:h-[200px] lg:w-[200px]  rounded-full bg-lightBeige "></div>
           <div className=" bg-darkGreen lg:text-2xl  p-2 px-4 lg:px-8 lg:py-3 rounded-xl">
-            {data.dog_name}
+            lhe
           </div>
         </section>
         <section className="grid md:grid-cols-2 2xl:grid-cols-3 gap-x-10">

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useGetAxios = (url) => {
+const useAxios = (url) => {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const accessToken = localStorage.getItem("token");
+
   useEffect(() => {
     let isMounted = true;
 
@@ -37,4 +38,4 @@ const useGetAxios = (url) => {
   return { data, error };
 };
 
-export default useGetAxios;
+export default useAxios;
