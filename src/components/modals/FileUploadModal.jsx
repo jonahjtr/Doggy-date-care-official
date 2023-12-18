@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PhotoUpload from "../forms/PhotoUpload";
+import FileUpload from "../forms/FileUpload";
 
-const PhotoUploadModal = () => {
+const FileUploadModal = (data) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
 
   const toggleCard = () => {
@@ -16,8 +16,8 @@ const PhotoUploadModal = () => {
       )}
       <div className="  "> </div>
       <div className="flex justify-center items-center">
-        <h1 className="bg-lightGreen w-fit  p-2 px-4 mb-2 rounded-xl cursor-pointer">
-          Upload Photo
+        <h1 className="bg-lightGreen w-fit  p-2 px-4 mb-2 rounded-xl ">
+          {data.title}
         </h1>
       </div>
       <div className="  flex justify-end pr-4 pb-4 ">
@@ -29,7 +29,7 @@ const PhotoUploadModal = () => {
       {/* Popout card */}
       {isCardVisible && (
         <div className="fixed flex-col items-end top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-darkGreen p-4 rounded-lg shadow-md z-20">
-          <PhotoUpload />
+          <FileUpload url={data.url} />
           <button
             className="bg-darkBeige  text-white p-2 mt-2 rounded-lg hover:bg-red-600"
             onClick={toggleCard}
@@ -42,4 +42,4 @@ const PhotoUploadModal = () => {
   );
 };
 
-export default PhotoUploadModal;
+export default FileUploadModal;

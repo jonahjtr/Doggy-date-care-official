@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useDeleteAxios from "../../hooks/useDeleteAxios";
 
-const SmallPhotoViews = (props) => {
+const PhotoViews = (props) => {
   const photoList = props.photoList;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -17,7 +17,6 @@ const SmallPhotoViews = (props) => {
   };
 
   const handleDelete = async () => {
-    console.log("look at this ", selectedPhoto.photo_name);
     try {
       const result = await useDeleteAxios(
         `/dogs/photos/${selectedPhoto.photo_name}`
@@ -64,7 +63,7 @@ const SmallPhotoViews = (props) => {
 
       {/* Modal Overlay */}
       {isModalOpen && selectedPhoto && (
-        <div className=" h-[100%] flex justify-center bg-black z-20">
+        <div className=" h-[100%] flex justify-center bg-black ">
           <div className="bg-lightBeige p-2 w-full h-full rounded-e-lg  ">
             <button className="" onClick={closeModal}>
               Close
@@ -84,4 +83,4 @@ const SmallPhotoViews = (props) => {
   );
 };
 
-export default SmallPhotoViews;
+export default PhotoViews;
