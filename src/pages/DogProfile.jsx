@@ -1,30 +1,40 @@
 import React, { useState } from "react";
 import useGetAxios from "../hooks/useGetAxios";
-import PhotoUpload from "../components/forms/PhotoUpload";
+// import PhotoUpload from "../components/forms/PhotoUpload";
+import SmallPhotoViews from "../components/profile_views/SmallPhotoViews";
+import MedsListViews from "../components/profile_views/MedsListViews";
+import PhotoUploadModal from "../components/modals/PhotoUploadModal";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
+
   console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
+
+  const [isCardVisible, setIsCardVisible] = useState(false);
+
+  const toggleCard = () => {
+    setIsCardVisible(!isCardVisible);
+  };
+
+  // <div className="w-full h-500px">
+  //   <PhotoUpload />
+  // </div>;
+
   return (
-    <div className="  bg-darkGreen  w-full h-full min-h-screen">
-      <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px] px-6 mx-auto">
-        <div className="w-full h-500px">
-          <PhotoUpload />
-        </div>
-        <section className="w-full h-[250px] lg:h-[350px]  rounded-xl   flex flex-col justify-evenly items-center  ">
+    <div className="  bg-darkGreen w-full h-full min-h-screen">
+      <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px] px-2 mx-auto">
+        <section className="w-full h-[250px] lg:h-[350px]  rounded-xl   flex flex-col justify-evenly items-center">
           <div className=" w-[130px] h-[130px] lg:h-[200px] lg:w-[200px]  rounded-full bg-lightBeige "></div>
           <div className=" bg-darkGreen lg:text-2xl  p-2 px-4 lg:px-8 lg:py-3 rounded-xl">
-            lhe
+            {data.dog_name}
           </div>
         </section>
-        <section className="grid md:grid-cols-2 2xl:grid-cols-3 gap-x-10">
-          <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border ">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">
-              photos group
-            </h1>
-            <div className="w-full border h-4/5 mb-3">
-              make a group of photos, 4 columns, 2 rows make them all square
+        <section className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
+          <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
+            <PhotoUploadModal />
+            <div className="w-full h-5/6 mb-3">
+              <SmallPhotoViews photoList={data.dog_photos} />
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
@@ -52,11 +62,11 @@ const DogProfile = () => {
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto mb-0 p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">
+            <h1 className="bg-lightGreen p-2 px-4 mb-2 rounded-xl">
               meds list
             </h1>
-            <div className=" w-full border h-4/5 mb-3">
-              in list form show all meds, if not show no meds
+            <div className=" py-2 rounded-xl w-full border h-4/5 mb-3">
+              <MedsListViews list={data.medicines} />
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto mb-0 p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">

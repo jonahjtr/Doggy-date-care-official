@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function FileUpload() {
+function PhotoUpload() {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -18,15 +18,18 @@ function FileUpload() {
     formData.append("file", file);
     formData.append("caption", "image");
     const accessToken = localStorage.getItem("token");
+    const dog_id = localStorage.getItem("current_dog");
+
     console.log(formData);
     axios
-      .post("http://localhost:3000/dogs/photos/26", formData, {
+      .post(`http://localhost:3000/dogs/photos/${dog_id}`, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
+        window.location.reload();
         console.log("File uploaded successfully:", response.data);
       })
       .catch((error) => {
@@ -35,7 +38,7 @@ function FileUpload() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg ">
       <h2 className="text-2xl font-semibold mb-4">Upload a File</h2>
       <div className="mb-4">
         <input
@@ -47,7 +50,7 @@ function FileUpload() {
       </div>
       <button
         onClick={handleUpload}
-        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+        className="bg-darkBeige  hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
       >
         Upload
       </button>
@@ -55,4 +58,4 @@ function FileUpload() {
   );
 }
 
-export default FileUpload;
+export default PhotoUpload;
