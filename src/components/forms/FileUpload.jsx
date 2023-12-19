@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function PhotoUpload() {
+function FileUpload(data) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -16,13 +16,10 @@ function PhotoUpload() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("caption", "image");
+    formData.append("file_nickname", "image");
     const accessToken = localStorage.getItem("token");
-    const dog_id = localStorage.getItem("current_dog");
-
-    console.log(formData);
     axios
-      .post(`http://localhost:3000/dogs/photos/${dog_id}`, formData, {
+      .post(`http://localhost:3000/dogs/${data.url}`, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
@@ -43,7 +40,7 @@ function PhotoUpload() {
       <div className="mb-4">
         <input
           type="file"
-          accept=".jpg, .jpeg, .png, .gif, image/*"
+          accept=".jpg, .jpeg, .png, .gif, image/*, .pdf"
           onChange={handleFileChange}
           className="border py-2 px-3 rounded-lg w-full"
         />
@@ -58,4 +55,4 @@ function PhotoUpload() {
   );
 }
 
-export default PhotoUpload;
+export default FileUpload;

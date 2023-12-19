@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const deleteRequest = async (url) => {
+const useDeleteAxios = async (url) => {
   const accessToken = localStorage.getItem("token");
 
   try {
@@ -16,8 +16,9 @@ const deleteRequest = async (url) => {
       throw new Error(`Request failed with status ${response.status}`);
     }
   } catch (error) {
+    console.log("response");
     throw new Error(`Request failed: ${error.message}`);
   }
 };
 
-export default deleteRequest;
+export default useDeleteAxios;

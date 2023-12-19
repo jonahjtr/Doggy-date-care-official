@@ -1,25 +1,14 @@
 import React, { useState } from "react";
 import useGetAxios from "../hooks/useGetAxios";
 // import PhotoUpload from "../components/forms/PhotoUpload";
-import SmallPhotoViews from "../components/profile_views/SmallPhotoViews";
+import PhotoViews from "../components/profile_views/PhotoViews";
 import MedsListViews from "../components/profile_views/MedsListViews";
-import PhotoUploadModal from "../components/modals/PhotoUploadModal";
+import FileUploadModal from "../components/modals/FileUploadModal";
+import FileViews from "../components/profile_views/FileViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
-
-  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
-
-  const [isCardVisible, setIsCardVisible] = useState(false);
-
-  const toggleCard = () => {
-    setIsCardVisible(!isCardVisible);
-  };
-
-  // <div className="w-full h-500px">
-  //   <PhotoUpload />
-  // </div>;
 
   return (
     <div className="  bg-darkGreen w-full h-full min-h-screen">
@@ -30,19 +19,17 @@ const DogProfile = () => {
             {data.dog_name}
           </div>
         </section>
-        <section className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
+        <main className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
           <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
-            <PhotoUploadModal />
+            <FileUploadModal url={`photos/${dogId}`} title="Photos" />
             <div className="w-full h-5/6 mb-3">
-              <SmallPhotoViews photoList={data.dog_photos} />
+              <PhotoViews photoList={data.dog_photos} />
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">
-              files group
-            </h1>
-            <div className=" w-full border h-4/5 mb-3">
-              list style files if files, if not, display, no files
+            <FileUploadModal url={`files/${dogId}`} title="Files" />
+            <div className=" w-full   h-4/5 mb-3">
+              <FileViews fileList={data.dog_files} />
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
@@ -75,7 +62,7 @@ const DogProfile = () => {
               in list form show all meds, if not show no meds
             </div>
           </section>
-        </section>
+        </main>
       </div>
     </div>
   );
