@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import useGetAxios from "../hooks/useGetAxios";
-// import PhotoUpload from "../components/forms/PhotoUpload";
 import PhotoViews from "../components/profile_views/PhotoViews";
 import MedsListViews from "../components/profile_views/MedsListViews";
-import FileUploadModal from "../components/modals/FileUploadModal";
 import FileViews from "../components/profile_views/FileViews";
 import BreedViews from "../components/profile_views/breedViews";
+import NotesViews from "../components/profile_views/NotesViews";
+import CalendarViews from "../components/profile_views/CalendarViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
+  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
 
   return (
@@ -21,44 +22,12 @@ const DogProfile = () => {
           </div>
         </section>
         <main className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
-          <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
-            <FileUploadModal url={`photos/${dogId}`} title="Photos" />
-            <div className="w-full h-5/6 mb-3">
-              <PhotoViews photoList={data.dog_photos} />
-            </div>
-          </section>
-          <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <FileUploadModal url={`files/${dogId}`} title="Files" />
-            <div className=" w-full   h-4/5 mb-3">
-              <FileViews fileList={data.dog_files} />
-            </div>
-          </section>
-          <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">
-              characteristics/ notes
-            </h1>
-            <div className=" w-full border h-4/5 mb-3">
-              list of notes, and characteristics of current dog
-            </div>
-          </section>
-          <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 ">breed info</h1>
-            <BreedViews breed_info={data.breed_info} />
-          </section>
-          <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto mb-0 p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-2 rounded-xl">
-              meds list
-            </h1>
-            <div className=" py-2 rounded-xl w-full border h-4/5 mb-3">
-              <MedsListViews list={data.medicines} />
-            </div>
-          </section>
-          <section className="w-full bg-darkGreen  h-[250px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto mb-0 p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-            <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">calander</h1>
-            <div className=" w-full border h-4/5 mb-3">
-              in list form show all meds, if not show no meds
-            </div>
-          </section>
+          <PhotoViews dogId={dogId} photoList={data.dog_photos} />
+          <FileViews dogId={dogId} fileList={data.dog_files} />
+          <NotesViews />
+          <BreedViews breed_info={data.breed_info} />
+          <MedsListViews medicineList={data.medicine_list} />
+          <CalendarViews />
         </main>
       </div>
     </div>
@@ -66,6 +35,8 @@ const DogProfile = () => {
 };
 
 export default DogProfile;
+
+// <MedsListViews medicineList={data.medicines} />;
 
 //information structure to be received
 
