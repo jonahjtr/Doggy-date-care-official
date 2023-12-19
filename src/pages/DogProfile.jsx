@@ -5,6 +5,7 @@ import PhotoViews from "../components/profile_views/PhotoViews";
 import MedsListViews from "../components/profile_views/MedsListViews";
 import FileUploadModal from "../components/modals/FileUploadModal";
 import FileViews from "../components/profile_views/FileViews";
+import BreedViews from "../components/profile_views/breedViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
@@ -12,7 +13,7 @@ const DogProfile = () => {
 
   return (
     <div className="  bg-darkGreen w-full h-full min-h-screen">
-      <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px] px-2 mx-auto">
+      <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px]  mx-auto">
         <section className="w-full h-[250px] lg:h-[350px]  rounded-xl   flex flex-col justify-evenly items-center">
           <div className=" w-[130px] h-[130px] lg:h-[200px] lg:w-[200px]  rounded-full bg-lightBeige "></div>
           <div className=" bg-darkGreen lg:text-2xl  p-2 px-4 lg:px-8 lg:py-3 rounded-xl">
@@ -40,12 +41,12 @@ const DogProfile = () => {
               list of notes, and characteristics of current dog
             </div>
           </section>
-          <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
+          <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
             <h1 className="bg-lightGreen p-2 px-4 mb-5 rounded-xl">
               breed info
             </h1>
-            <div className=" w-full border h-4/5 mb-3">
-              df display main injhgjhgjhghjgd in list form, or some cool way
+            <div className=" w-full  h-4/5 mb-3">
+              <BreedViews breed_info={data.breed_info} />
             </div>
           </section>
           <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto mb-0 p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
