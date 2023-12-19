@@ -9,14 +9,13 @@ const FileViews = (props) => {
     try {
       const result = await useDeleteAxios(`/dogs/files/${file_name}`);
       if (result) window.location.reload();
-      console.log("Delete successful", result);
     } catch (error) {
       console.error("Delete failed", error.message);
     }
   };
 
   return (
-    <div className="h-full bg-lightBeige overflow-y-scroll">
+    <div className="h-full rounded-2xl no-scrollbar  bg-lightBeige overflow-y-scroll">
       {fileList.map((file, index) => {
         let isEven = false;
         if (index % 2 == 0) isEven = true;
@@ -26,30 +25,16 @@ const FileViews = (props) => {
             target="_blank"
             className={
               isEven
-                ? "  w-full flex items-center justify-between"
-                : "bg-darkBeige  w-full flex items-center justify-between"
+                ? "w-full flex items-center justify-between"
+                : "bg-darkBeige w-full flex items-center justify-between"
             }
           >
             <a
               target="_blank"
               href={file.file_url}
-              className="flex w-[70%] items-center justify-between"
+              className=" pl-2 flex w-[70%] items-center justify-between"
             >
               <div className="truncate flex  items-center w-[70%]">
-                <svg
-                  class="w-[17px] h-[17px] text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 16 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"
-                  />
-                </svg>
                 {file.file_nickname}
               </div>
               <div>{file.upload_date}</div>{" "}
