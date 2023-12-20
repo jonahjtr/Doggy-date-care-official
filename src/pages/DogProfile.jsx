@@ -9,8 +9,8 @@ import CalendarViews from "../components/profile_views/CalendarViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
+  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
-
   return (
     <div className="  bg-darkGreen w-full h-full min-h-screen">
       <div className="bg-lightGreen  pb-8 min-h-screen max-w-[1800px]  mx-auto">
@@ -25,7 +25,7 @@ const DogProfile = () => {
           <FileViews dogId={dogId} fileList={data.dog_files} />
           <NotesViews />
           <BreedViews breed_info={data.breed_info} />
-          <MedsListViews medicineList={data.medicine_list} />
+          <MedsListViews dogId={dogId} medicineList={data.medicines} />
           <CalendarViews />
         </main>
       </div>
@@ -83,33 +83,6 @@ export default DogProfile;
 //             "medicine_start_date": "2023-02-01",
 //             "medicine_end_date": "2023-02-05",
 //             "medicine_instructions": "Instructions 2"
-//         },
-//         {
-//             "medicine_id": 19,
-//             "medicine_name": "Medicine 3 for Dog 26",
-//             "medicine_dosage": "Dosage 3",
-//             "medicine_frequency": "Frequency 3",
-//             "medicine_start_date": "2023-03-01",
-//             "medicine_end_date": "2023-03-05",
-//             "medicine_instructions": "Instructions 3"
-//         },
-//         {
-//             "medicine_id": 20,
-//             "medicine_name": "Medicine 4 for Dog 26",
-//             "medicine_dosage": "Dosage 4",
-//             "medicine_frequency": "Frequency 4",
-//             "medicine_start_date": "2023-04-01",
-//             "medicine_end_date": "2023-04-05",
-//             "medicine_instructions": "Instructions 4"
-//         },
-//         {
-//             "medicine_id": 21,
-//             "medicine_name": "Medicine 5 for Dog 26",
-//             "medicine_dosage": "Dosage 5",
-//             "medicine_frequency": "Frequency 5",
-//             "medicine_start_date": "2023-05-01",
-//             "medicine_end_date": "2023-05-05",
-//             "medicine_instructions": "Instructions 5"
 //         }
 //     ]
 // }

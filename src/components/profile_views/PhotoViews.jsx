@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import useDeleteAxios from "../../hooks/useDeleteAxios";
-import FileUploadModal from "../modals/FileUploadModal";
+import CreateModal from "../modals/CreateModal";
+import FileUpload from "../forms/FileUpload";
+
 const PhotoViews = (props) => {
   const photoList = props.photoList;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +35,11 @@ const PhotoViews = (props) => {
 
   return (
     <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
-      <FileUploadModal url={`photos/${props.dogId}`} title="Photos" />
+      <CreateModal
+        url={`photos/${props.dogId}`}
+        title="Photos"
+        component={<FileUpload />}
+      />
 
       <div className="w-full h-5/6 mb-3">
         <div className="overflow-hidden h-full  flex justify-center items-center">
