@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useDeleteAxios from "../../hooks/useDeleteAxios";
-import FileUploadModal from "../modals/FileUploadModal";
+import CreateModal from "../modals/CreateModal";
+import FileUpload from "../forms/FileUpload";
 
 const FileViews = ({ fileList, dogId }) => {
   const isFileListValid = Array.isArray(fileList) && fileList.length > 0;
@@ -14,7 +15,11 @@ const FileViews = ({ fileList, dogId }) => {
   };
   return (
     <section className="w-full bg-darkGreen h-[250px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-      <FileUploadModal url={`files/${dogId}`} title="Files" />
+      <CreateModal
+        url={`files/${dogId}`}
+        title="Files"
+        component={<FileUpload />}
+      />
       <div className="h-full w-full h-4/5 mb-3 rounded-2xl no-scrollbar bg-lightBeige overflow-y-scroll">
         {!isFileListValid ? (
           <div className="flex justify-center items-center h-full">

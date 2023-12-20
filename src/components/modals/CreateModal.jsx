@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import FileUpload from "../forms/FileUpload";
 import ViewHeader from "../profile_views/components/ViewHeader";
 
-const FileUploadModal = (data) => {
+const CreateModal = (props) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
 
   const toggleCard = () => {
@@ -17,7 +16,7 @@ const FileUploadModal = (data) => {
       )}
       <div className="  "> </div>
       <div className="flex justify-center items-center">
-        <ViewHeader title={data.title} />
+        <ViewHeader title={props.title} />
       </div>
       <div className="  flex justify-end pr-4 pb-4 ">
         <button onClick={toggleCard} className="text-3xl">
@@ -28,7 +27,11 @@ const FileUploadModal = (data) => {
       {/* Popout card */}
       {isCardVisible && (
         <div className="fixed flex-col items-end top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-darkGreen p-4 rounded-lg shadow-md z-20">
-          <FileUpload url={data.url} />
+          {React.cloneElement(props.component, {
+            url: props.url,
+            title: props.title,
+          })}
+
           <button
             className="bg-darkBeige  text-white p-2 mt-2 rounded-lg hover:bg-red-600"
             onClick={toggleCard}
@@ -41,4 +44,4 @@ const FileUploadModal = (data) => {
   );
 };
 
-export default FileUploadModal;
+export default CreateModal;

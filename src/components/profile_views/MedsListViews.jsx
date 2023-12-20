@@ -1,7 +1,7 @@
 import React from "react";
-import ViewHeader from "./components/ViewHeader";
+import CreateModal from "../modals/CreateModal";
 
-const MedsListViews = ({ medicineList }) => {
+const MedsListViews = ({ medicineList, dogId }) => {
   if (!medicineList) {
     return (
       <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
@@ -15,8 +15,7 @@ const MedsListViews = ({ medicineList }) => {
 
   return (
     <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-      <ViewHeader title={"Characteristics"} />
-
+      <CreateModal url={`medicine/${dogId}`} title="Medicines" />
       <div className=" py-2 rounded-xl w-full border h-4/5 mb-3">
         <div className="h-full overflow-y-scroll">
           {medicineList.map((medicine, index) => (
