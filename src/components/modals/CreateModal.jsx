@@ -26,14 +26,14 @@ const CreateModal = (props) => {
 
       {/* Popout card */}
       {isCardVisible && (
-        <div className="fixed flex-col items-end top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-darkGreen p-4 rounded-lg shadow-md z-20">
+        <div className="fixed flex-col w-max min-w-[50%] items-end top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-darkGreen p-4 rounded-lg shadow-md z-20">
           {React.cloneElement(props.component, {
             url: props.url,
             title: props.title,
           })}
 
           <button
-            className="bg-darkBeige  text-white p-2 mt-2 rounded-lg hover:bg-red-600"
+            className="bg-darkBeige  text-white p-2 mt-2 rounded-lg hover:bg-orange"
             onClick={toggleCard}
           >
             Close

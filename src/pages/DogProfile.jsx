@@ -9,6 +9,7 @@ import CalendarViews from "../components/profile_views/CalendarViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
+  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
   return (
     <div className="  bg-darkGreen w-full h-full min-h-screen">
