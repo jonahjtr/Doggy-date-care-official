@@ -1,12 +1,12 @@
 import React from "react";
+import ViewHeader from "./components/ViewHeader";
 
 const BreedViews = ({ breed_info }) => {
-  console.log(breed_info);
   if (!breed_info || breed_info.length < 1)
     return <div>no information to diplay</div>;
   return (
     <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-      <h1 className="bg-lightGreen p-2 px-4 mb-5 ">breed info</h1>
+      <ViewHeader title={"Breed"} />
       <div className="text-xs h-4/5 mb-3 bg-lightBeige  rounded-2xl w-full ">
         <div className="w-full h-1/6  flex justify-center">
           <h1 className=" text-2xl font-bold">

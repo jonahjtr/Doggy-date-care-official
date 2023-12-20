@@ -9,7 +9,6 @@ import CalendarViews from "../components/profile_views/CalendarViews";
 const DogProfile = () => {
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error } = useGetAxios(`/dogs/${dogId}`);
-  console.log(data);
   localStorage.setItem("current_dog_data", JSON.stringify(data));
 
   return (
@@ -36,8 +35,6 @@ const DogProfile = () => {
 
 export default DogProfile;
 
-// <MedsListViews medicineList={data.medicines} />;
-
 //information structure to be received
 
 // {
@@ -47,18 +44,6 @@ export default DogProfile;
 //     "dog_age": 4,
 //     "dog_sex": "Male",
 //     "dog_profile_picture": {
-//         "type": "Buffer",
-//         "data": [
-//             114,
-//             111,
-//             99,
-//             107,
-//             121,
-//             46,
-//             106,
-//             112,
-//             103
-//         ]
 //     },
 //     "breed_info": {
 //         "breed_id": 60,

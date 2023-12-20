@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FileUpload from "../forms/FileUpload";
+import ViewHeader from "../profile_views/components/ViewHeader";
 
 const FileUploadModal = (data) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -16,9 +17,7 @@ const FileUploadModal = (data) => {
       )}
       <div className="  "> </div>
       <div className="flex justify-center items-center">
-        <h1 className="bg-lightGreen w-fit  p-2 px-4 mb-2 rounded-xl ">
-          {data.title}
-        </h1>
+        <ViewHeader title={data.title} />
       </div>
       <div className="  flex justify-end pr-4 pb-4 ">
         <button onClick={toggleCard} className="text-3xl">
