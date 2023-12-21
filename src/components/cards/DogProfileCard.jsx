@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../utils/Button";
 
 const DogProfileCard = ({ data }) => {
   function setCurrentDog(data) {
@@ -9,55 +10,36 @@ const DogProfileCard = ({ data }) => {
   return (
     <div
       onClick={() => setCurrentDog(data)}
-      className=" bg-darkGreen  h-[150px] lg:h-[200px] 2xl:h-[250px] w-full max-w-[1300px] mx-auto grid grid-cols-6 my-6 p-1  rounded-xl "
+      className="bg-darkGreen h-[150px] lg:h-[250px] 2xl:h-[250px] w-full max-w-[1300px] mx-auto grid grid-cols-6 my-6  rounded-xl"
     >
-      <div className="col-span-2  flex justify-center items-center">
-        <Link to={"/dog-profile"}>
-          <img
-            className="  rounded-full bg-lightBeige w-[130px] lg:w-[150px] lg:h-[150px]  2xl:h-[200px] 2xl:w-[200px] h-[130px] "
-            src={data.dog_profile_picture}
-          />
+      <div className="col-span-2 h-[150px] lg:h-[250px] 2xl:h-[250px] border flex flex-col justify-center items-center">
+        <Link className=" w-1/2 pb-1/2 rounded-full mx-auto bg-white overflow-hidden">
+          {/* Place your profile picture here */}
         </Link>
+        <h1 className=" text-white text-3xl text-center overflow-hidden">
+          {data.dog_name}
+        </h1>
       </div>
+
       <section className=" p-2 col-span-4 ">
-        <section className="  flex justify-between h-1/4 2xl:h-1/3 lg:py-2 ">
-          <h1 className="bg-darkBeige rounded-xl flex justify-center items-center px-4 ">
-            {data.dog_name}
-          </h1>
-          <p className="bg-darkBeige rounded-xl flex justify-center items-center px-2 ">
-            {data.dog_date_of_birth}
-          </p>
-        </section>
-        <section className=" text-xs text-center h-3/4 grid grid-cols-3 gap-x-3 gap-y-4 p-2 py-3  xl:h-2/3 ">
+        <section className=" text-xs text-center h-full grid grid-cols-3 gap-x-6 gap-y-6 p-2 py-6    ">
           <Link>
-            <div className="bg-darkBeige ">
-              <p>Breed Info</p>
-            </div>
+            <Button buttonName="Breed Info" />
           </Link>
           <Link>
-            <div className="bg-darkBeige">
-              <p> my characteristics</p>
-            </div>
+            <Button buttonName="My Notes" />
           </Link>
           <Link>
-            <div className="bg-darkBeige">
-              <p> my files</p>
-            </div>
+            <Button buttonName="My Meds" />
           </Link>
           <Link>
-            <div className="bg-darkBeige">
-              <p>my photos</p>
-            </div>
+            <Button buttonName="My photos" />
           </Link>
           <Link>
-            <div className="bg-darkBeige">
-              <p>my dates</p>
-            </div>
+            <Button buttonName="My Files" />
           </Link>
           <Link>
-            <div className="bg-darkBeige">
-              <p>my dates</p>
-            </div>
+            <Button buttonName="My Dates" />
           </Link>
         </section>
       </section>
@@ -66,6 +48,28 @@ const DogProfileCard = ({ data }) => {
 };
 
 export default DogProfileCard;
+
+// <div className="col-span-2 border flex flex-col justify-center items-between">
+//   <Link className=" w-full h-full " to={"/dog-profile"}>
+//     <div className="  max-h-full w-[100px] h-[100px]    md:w-1/2 md:pb-1/2 rounded-full mx-auto bg-white"></div>
+//   </Link>
+//   <h1 className=" pt-3 text-white flex  text-3xl  justify-center items-center px-4 ">
+//     {data.dog_name}
+//   </h1>
+// </div>;
+
+// <img
+//   className="  rounded-full bg-white w-[100px] lg:w-[120px] lg:h-[120px]  2xl:h-[180px] 2xl:w-[180px] h-[100px] "
+//   src={data.dog_profile_picture}
+// />
+// <h1 className=" pt-3 text-white flex  text-3xl  justify-center items-center px-4 ">
+// {data.dog_name}
+// </h1>
+
+//  <img
+//    className=" rounded-full   w-1/2 pb-1/2 bg-white "
+//    src={data.dog_profile_picture}
+//  />;
 
 // <div className="border border-black bg-darkBeige w-full h-1/4">
 //             <p>{data.dog_age}</p>
@@ -85,3 +89,4 @@ export default DogProfileCard;
 //           <div className="  border border-black bg-darkBeige w-full h-1/4">
 //             <p>{data.dog_breed}</p>
 //           </div>
+// <section className="  flex justify-between h-1/4 2xl:h-1/3 lg:py-2 "></section>;

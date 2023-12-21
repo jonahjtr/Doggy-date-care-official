@@ -3,13 +3,19 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      darkGreen: "#7C9070",
-      lightGreen: "#9CA777",
-      darkBeige: "#F8CA8C",
-      lightBeige: "#FEE8B0",
+      darkGreen: "#346051",
+      white: "#e6ebe0", //background greenish white
+      darkBeige: "#f0a202", //button and word defaultcolor
+      lightBeige: "#f8f8ff",
       orange: "#F97B22",
+      weird: "#af3800",
     },
-    extend: {},
+    extend: {
+      padding: {
+        "1/2": "50%",
+        full: "100%",
+      },
+    },
   },
   plugins: [],
 };
