@@ -10,7 +10,7 @@ const MedsListViews = ({ medicineList, dogId }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const deleteRef = useRef(null);
-
+  console.log(medicineList);
   const handleEditClick = (medicine) => {
     setIsModalVisible(true);
     setSelectedMedicine(medicine);
@@ -21,33 +21,36 @@ const MedsListViews = ({ medicineList, dogId }) => {
   const handleEditSave = (editedMedicine) => {
     console.log("Edited Medicine Data: ", editedMedicine);
   };
-
+  const handleEditClose = () => {
+    setIsModalVisible(false);
+    setSelectedMedicine(null);
+  };
   const handleDelete = async (medicineId) => {
     try {
       const result = await useDeleteAxios(
         `/dogs/medicine/${dogId}/${medicineId}`
       );
       if (result) {
-        // Remove the deleted medicine from the local medicineList
         window.location.reload();
-        // Update the state with the updated medicine list
         console.log("Delete successful", result);
       }
     } catch (error) {
       console.error("Delete failed", error.message);
     }
   };
-  const handleDeleteClick = (medicine) => {
-    setConfirmDelete(false);
-  };
-  const handleEditClose = () => {
-    setIsModalVisible(false);
-    setSelectedMedicine(null);
-  };
-  if (!medicineList) {
+
+  if (
+    !medicineList ||
+    medicineList.length === 0 ||
+    medicineList[0].id === null
+  ) {
     return (
-      <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
-        <h1 className="bg-lightGreen p-2 px-4 mb-2 rounded-xl">meds list</h1>
+      <section className="w-full bg-darkBeige   h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+        <CreateModal
+          url={`/dogs/medicine/${dogId}`}
+          title="Medicines"
+          component={<MedCreate />}
+        />
         <div className=" w-full border flex justify-center items-center rounded-2xl h-4/5 mb-3">
           No meds on record.
         </div>
@@ -56,7 +59,7 @@ const MedsListViews = ({ medicineList, dogId }) => {
   }
 
   return (
-    <section className="w-full bg-darkGreen  h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center border">
+    <section className="w-full bg-darkBeige   h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
       <CreateModal
         url={`/dogs/medicine/${dogId}`}
         title="Medicines"
@@ -103,3 +106,5 @@ const MedsListViews = ({ medicineList, dogId }) => {
 };
 
 export default MedsListViews;
+
+// handleDelete(medicine.id);

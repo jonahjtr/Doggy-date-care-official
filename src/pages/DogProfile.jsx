@@ -20,7 +20,7 @@ const DogProfile = () => {
             {data.dog_name}
           </div>
         </section>
-        <main className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
+        <main className="grid bg-lightBeige pt-10 px-10 lg:grid-cols-2 2xl:grid-cols-3 gap-x-10">
           <PhotoViews dogId={dogId} photoList={data.dog_photos} />
           <FileViews dogId={dogId} fileList={data.dog_files} />
           <NotesViews />
