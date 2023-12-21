@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import CreateModal from "../modals/CreateModal";
 import MedCreate from "../forms/MedCreate";
 import EditModal from "../modals/EditModal";
 import useDeleteAxios from "../../hooks/useDeleteAxios";
+import useClickOutside from "../../hooks/clickOutside";
 
 const MedsListViews = ({ medicineList, dogId }) => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [confirmVisable, setConfirmVisible] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const deleteRef = useRef(null);
 
   const handleEditClick = (medicine) => {
     setIsModalVisible(true);
     setSelectedMedicine(medicine);
   };
-
+  useClickOutside(deleteRef, () => {
+    setConfirmDelete(false);
+  });
   const handleEditSave = (editedMedicine) => {
     console.log("Edited Medicine Data: ", editedMedicine);
   };
@@ -34,7 +38,7 @@ const MedsListViews = ({ medicineList, dogId }) => {
     }
   };
   const handleDeleteClick = (medicine) => {
-    setConfirmVisible(true);
+    setConfirmDelete(false);
   };
   const handleEditClose = () => {
     setIsModalVisible(false);
@@ -73,12 +77,15 @@ const MedsListViews = ({ medicineList, dogId }) => {
               <button onClick={() => handleEditClick(medicine)}>Edit</button>
               <div></div>
 
-              {confirmVisable ? (
-                <button onClick={() => handleDelete(medicine.id)}>
+              {confirmDelete ? (
+                <button
+                  ref={deleteRef}
+                  onClick={() => handleDelete(medicine.id)}
+                >
                   confirm delete
                 </button>
               ) : (
-                <button onClick={() => setConfirmVisible(true)}>delete</button>
+                <button onClick={() => setConfirmDelete(true)}>delete</button>
               )}
             </div>
           ))}

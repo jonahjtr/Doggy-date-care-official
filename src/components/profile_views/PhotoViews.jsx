@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import useDeleteAxios from "../../hooks/useDeleteAxios";
 import CreateModal from "../modals/CreateModal";
 import FileUpload from "../forms/FileUpload";
+import useClickOutside from "../../hooks/clickOutside";
 
 const PhotoViews = (props) => {
   const photoList = props.photoList;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const componentRef = useRef(null);
+  const deleteRef = useRef(null);
 
   const openModal = (photo) => {
     setSelectedPhoto(photo);
@@ -17,7 +21,14 @@ const PhotoViews = (props) => {
     setSelectedPhoto(null);
     setIsModalOpen(false);
   };
+  useClickOutside(componentRef, () => {
+    setSelectedPhoto(null);
+    setIsModalOpen(false);
+  });
 
+  useClickOutside(deleteRef, () => {
+    setConfirmDelete(false);
+  });
   const handleDelete = async () => {
     try {
       const result = await useDeleteAxios(
@@ -34,7 +45,10 @@ const PhotoViews = (props) => {
   const first8Photos = snippet.slice(0, 8);
 
   return (
-    <section className="w-full bg-darkGreen  h-[350px] sm:h-[400px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
+    <section
+      ref={componentRef}
+      className="w-full bg-darkGreen  h-[350px] sm:h-[400px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  "
+    >
       <CreateModal
         url={`photos/${props.dogId}`}
         title="Photos"
@@ -78,9 +92,16 @@ const PhotoViews = (props) => {
                 <button className="" onClick={closeModal}>
                   Close
                 </button>
-                <button className="" onClick={handleDelete}>
-                  delete
-                </button>
+                {confirmDelete ? (
+                  <button ref={deleteRef} className="" onClick={handleDelete}>
+                    are you sure?
+                  </button>
+                ) : (
+                  <button className="" onClick={() => setConfirmDelete(true)}>
+                    delete
+                  </button>
+                )}
+
                 <img
                   className=" h-[90%] rounded-2xl  "
                   src={selectedPhoto.photo_url}
