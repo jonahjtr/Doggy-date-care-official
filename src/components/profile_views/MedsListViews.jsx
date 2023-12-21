@@ -7,6 +7,7 @@ import useDeleteAxios from "../../hooks/useDeleteAxios";
 const MedsListViews = ({ medicineList, dogId }) => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [confirmVisable, setConfirmVisible] = useState(false);
 
   const handleEditClick = (medicine) => {
     setIsModalVisible(true);
@@ -31,6 +32,9 @@ const MedsListViews = ({ medicineList, dogId }) => {
     } catch (error) {
       console.error("Delete failed", error.message);
     }
+  };
+  const handleDeleteClick = (medicine) => {
+    setConfirmVisible(true);
   };
   const handleEditClose = () => {
     setIsModalVisible(false);
@@ -68,7 +72,14 @@ const MedsListViews = ({ medicineList, dogId }) => {
 
               <button onClick={() => handleEditClick(medicine)}>Edit</button>
               <div></div>
-              <button onClick={() => handleDelete(medicine.id)}>delete</button>
+
+              {confirmVisable ? (
+                <button onClick={() => handleDelete(medicine.id)}>
+                  confirm delete
+                </button>
+              ) : (
+                <button onClick={() => setConfirmVisible(true)}>delete</button>
+              )}
             </div>
           ))}
         </div>

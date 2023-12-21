@@ -26,23 +26,18 @@ const MedCreate = ({ url, title }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Make a POST request using usePostAxios
       const response = await usePostAxios(url, formData);
 
-      // Handle the response as needed
       console.log("Response:", response);
 
-      // Clear the form or perform other actions upon successful submission
       window.location.reload();
     } catch (error) {
-      // Handle errors
       console.error("Error:", error);
       setErrorMessage("Failed to create medicine. Please try again.");
     }
   };
 
   return (
-    // <div className="fixed flex items-center justify-center w-full h-full backdrop-filter backdrop-brightness-50 backdrop-blur-xl z-30">
     <div className="w-[80%] max-w-[500px]  mx-auto">
       <h1 className="text-3xl font-semibold mb-6 text-center">{title}</h1>
       {errorMessage && (
@@ -58,6 +53,7 @@ const MedCreate = ({ url, title }) => {
             Medicine Name:
           </label>
           <input
+            required
             type="text"
             id="medicine_name"
             name="medicine_name"
@@ -76,6 +72,7 @@ const MedCreate = ({ url, title }) => {
             Start Date:
           </label>
           <input
+            required
             type="date"
             id="medicine_start_date"
             name="medicine_start_date"
@@ -94,6 +91,7 @@ const MedCreate = ({ url, title }) => {
             End Date:
           </label>
           <input
+            required
             type="date"
             id="medicine_end_date"
             name="medicine_end_date"
@@ -112,6 +110,7 @@ const MedCreate = ({ url, title }) => {
             Dosage:
           </label>
           <input
+            required
             type="text"
             id="medicine_dosage"
             name="medicine_dosage"
@@ -130,6 +129,7 @@ const MedCreate = ({ url, title }) => {
             Instructions:
           </label>
           <textarea
+            required
             id="medicine_instructions"
             name="medicine_instructions"
             value={formData.medicine_instructions}
@@ -148,6 +148,7 @@ const MedCreate = ({ url, title }) => {
             Frequency:
           </label>
           <input
+            required
             type="text"
             id="medicine_frequency"
             name="medicine_frequency"
@@ -166,6 +167,7 @@ const MedCreate = ({ url, title }) => {
             Description:
           </label>
           <textarea
+            required
             id="description"
             name="description"
             value={formData.description}
@@ -186,7 +188,6 @@ const MedCreate = ({ url, title }) => {
         </div>
       </form>
     </div>
-    // </div>
   );
 };
 
