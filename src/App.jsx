@@ -5,11 +5,14 @@ import CreateAccount from "./pages/CreateAccount";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import DogProfile from "./pages/DogProfile";
+import NotHomePage from "./pages/NotHomePage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+      <Route path="/nothome" element={<NotHomePage />} />
+
       <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/login" element={<Login />} />
       <Route path="/homepage" element={<HomePage />} />
