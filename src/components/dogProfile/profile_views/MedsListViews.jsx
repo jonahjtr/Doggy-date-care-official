@@ -1,16 +1,15 @@
 import React, { useState, useRef } from "react";
 import CreateModal from "../modals/CreateModal";
-import MedCreate from "../forms/MedCreate";
+import MedCreate from "../../forms/MedCreate";
 import EditModal from "../modals/EditModal";
-import useDeleteAxios from "../../hooks/useDeleteAxios";
-import useClickOutside from "../../hooks/clickOutside";
+import useDeleteAxios from "../../../hooks/axios/useDeleteAxios";
+import useClickOutside from "../../../hooks/clickOutside";
 
 const MedsListViews = ({ medicineList, dogId }) => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const deleteRef = useRef(null);
-  console.log(medicineList);
   const handleEditClick = (medicine) => {
     setIsModalVisible(true);
     setSelectedMedicine(medicine);
@@ -45,7 +44,7 @@ const MedsListViews = ({ medicineList, dogId }) => {
     medicineList[0].id === null
   ) {
     return (
-      <section className="w-full bg-darkBeige   h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+      <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
         <CreateModal
           url={`/dogs/medicine/${dogId}`}
           title="Medicines"
@@ -59,7 +58,7 @@ const MedsListViews = ({ medicineList, dogId }) => {
   }
 
   return (
-    <section className="w-full bg-darkBeige   h-[250px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+    <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
       <CreateModal
         url={`/dogs/medicine/${dogId}`}
         title="Medicines"

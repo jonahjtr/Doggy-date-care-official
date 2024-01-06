@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ViewHeader from "../profile_views/components/ViewHeader";
-import usePutAxios from "../../hooks/usePutAxios";
+import usePutAxios from "../../../hooks/axios/usePutAxios";
 
 const EditModal = ({ medicine, onSave, onClose }) => {
   const [editedMedicine, setEditedMedicine] = useState({ ...medicine });

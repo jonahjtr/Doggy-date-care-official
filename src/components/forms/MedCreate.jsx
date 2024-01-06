@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import usePostAxios from "../../hooks/usePostAxios";
+import usePostAxios from "../../hooks/axios/usePostAxios";
 
 const MedCreate = ({ url, title }) => {
   const initialValues = {

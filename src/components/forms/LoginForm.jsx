@@ -18,7 +18,7 @@ const LoginForm = () => {
       localStorage.setItem("loggedIn", true);
       localStorage.setItem("token", token);
 
-      window.location.href = "/homepage";
+      window.location.href = "/dashboard";
     } catch (error) {
       console.log(error.response);
       console.error("Login failed:", error.response);

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
-import useDeleteAxios from "../../hooks/useDeleteAxios";
+import useDeleteAxios from "../../../hooks/axios/useDeleteAxios";
 import CreateModal from "../modals/CreateModal";
-import FileUpload from "../forms/FileUpload";
-import useClickOutside from "../../hooks/clickOutside";
+import FileUpload from "../../forms/FileUpload";
+import useClickOutside from "../../../hooks/clickOutside";
 
 const FileViews = ({ fileList, dogId }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -28,7 +28,7 @@ const FileViews = ({ fileList, dogId }) => {
   const isFileListValid = Array.isArray(fileList) && fileList.length > 0;
 
   return (
-    <section className="w-full bg-darkBeige  h-[250px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+    <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center   ">
       {" "}
       <CreateModal
         url={`files/${dogId}`}

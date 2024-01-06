@@ -5,17 +5,17 @@ const BreedViews = ({ breed_info }) => {
   if (!breed_info || breed_info.length < 1)
     return <div>no information to diplay</div>;
   return (
-    <section className="w-full bg-darkBeige   h-[350px] sm:h-[400px]  lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+    <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
       <ViewHeader title={"Breed"} />
-      <div className="text-xs h-4/5 mb-3 bg-lightBeige  rounded-2xl w-full ">
+      <div className="text-xs h-4/5 mb-3 bg-white  rounded-2xl w-full ">
         <div className="w-full h-1/6  flex justify-center">
           <h1 className=" text-2xl font-bold">
             {" "}
             {breed_info.breed_name ? breed_info.breed_name : "unknown"}
           </h1>
         </div>
-        <main className="w-full h-5/6  border grid grid-cols-3">
-          <section className="border flex flex-col justify-around ">
+        <main className="w-full h-5/6   grid grid-cols-3">
+          <section className=" flex flex-col justify-around ">
             <div className="flex h-1/6 justify-between flex-col items-center">
               <p className="font-bold">Excersize Needs:</p>
               <p>

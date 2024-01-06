@@ -1,17 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import CreateAccount from "./CreateAccount";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const LandingPage = () => {
+import Header from "../components/Header";
+import AboutSection from "../landingPage/AboutSection";
+import DescriptionSection from "../landingPage/DescriptionSection";
+import BenefitsSection from "../landingPage/BenefitsSection";
+
+function LandingPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn === "true") {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   return (
-    <div className="pl-24 w-full">
-      <Link to={"/create-account"}> create account page here</Link>
-      <Link className="pl-24" to={"/login"}>
-        {" "}
-        log in page here
-      </Link>
+    <div>
+      <Header />
+      <AboutSection />
+      <DescriptionSection />
+      <BenefitsSection />
     </div>
   );
-};
+}
 
 export default LandingPage;
