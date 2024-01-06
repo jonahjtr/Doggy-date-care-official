@@ -1,6 +1,6 @@
 import React from "react";
 import ViewHeader from "./components/ViewHeader";
-import Calendar from "../modals/Calendar";
+import Calendar from "../../Calendar/Calendar";
 
 const CalendarViews = () => {
   return (

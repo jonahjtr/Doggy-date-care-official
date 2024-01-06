@@ -8,18 +8,25 @@ export default {
       md: "768px",
       lg: "976px",
       xl: "1440px",
+      mobileBP: "768px",
     },
     colors: {
       darkGreen: "#346051",
-      white: "#e6ebe0", //background greenish white
       darkBeige: "#f0a202", //button and word defaultcolor
       lightBeige: "#f8f8ff",
       orange: "#F97B22",
       weird: "#af3800",
+      black: "#000000",
+      grey: "#999999",
+      purple: "#5B5BCB",
       //new color names and stuff here-----
-      primary: "#346051",
+      // primary: "#346051",
+      primary: "#7C9070",
       accent: "#f0a202",
-      white: "#e6ebe0", //background greenish white
+      white: "#ffffff",
+      beige: "#FEE8B0",
+      actWhite: "#e6ebe0",
+      // white: "#e6ebe0", //background greenish white
     },
     extend: {
       padding: {

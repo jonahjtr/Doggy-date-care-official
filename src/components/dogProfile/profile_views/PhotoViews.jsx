@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
-import useDeleteAxios from "../../hooks/useDeleteAxios";
+import useDeleteAxios from "../../../hooks/axios/useDeleteAxios";
 import CreateModal from "../modals/CreateModal";
-import FileUpload from "../forms/FileUpload";
-import useClickOutside from "../../hooks/clickOutside";
+import FileUpload from "../../forms/FileUpload";
+import useClickOutside from "../../../hooks/clickOutside";
 
-const PhotoViews = (props) => {
-  const photoList = props.photoList;
+const PhotoViews = ({ photoList, dogId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -47,10 +46,15 @@ const PhotoViews = (props) => {
   return (
     <section
       ref={componentRef}
-      className="w-full bg-darkBeige  h-[350px] sm:h-[400px] lg:h-[350px] 2xl:h-[400px] max-w-[1000px] mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  "
+      className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  "
     >
       <CreateModal
-        url={`photos/${props.dogId}`}
+        url={`photos/profile/${dogId}`}
+        title="profile photo"
+        component={<FileUpload />}
+      />
+      <CreateModal
+        url={`photos/${dogId}`}
         title="Photos"
         component={<FileUpload />}
       />
@@ -60,8 +64,8 @@ const PhotoViews = (props) => {
           <div
             className={
               isModalOpen
-                ? "h-full bg-lightBeige w-[30%] md:w-[60%] rounded-s-xl  p-1 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-2  no-scrollbar overflow-y-scroll"
-                : "h-full  bg-lightBeige px-4 pb-3  grid rounded-xl grid-cols-3 sm:grid-cols-4 lg:grid-cols-3  no-scrollbar overflow-y-scroll"
+                ? "h-full bg-white w-[30%] sm:w-[60%] rounded-s-xl  p-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  no-scrollbar overflow-y-scroll"
+                : "h-full  bg-white px-4 pb-3  grid rounded-xl grid-cols-2 md:grid-cols-3 lg:grid-cols-3  no-scrollbar overflow-y-scroll"
             }
           >
             {first8Photos.length > 0 ? (
@@ -88,7 +92,7 @@ const PhotoViews = (props) => {
           {/* Modal Overlay */}
           {isModalOpen && selectedPhoto && (
             <div className=" h-[100%] w-full flex justify-center bg-black ">
-              <div className="bg-lightBeige p-2 w-full h-full rounded-e-lg  ">
+              <div className="bg-white p-2 w-full h-full rounded-e-lg  ">
                 <button className="" onClick={closeModal}>
                   Close
                 </button>
