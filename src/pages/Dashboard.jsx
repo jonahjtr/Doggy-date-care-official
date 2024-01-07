@@ -9,14 +9,19 @@ import SideNav from "../components/sidebarNav/SideNav";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const LoggedIn = useAtom(isLoggedIn);
+  const [LoggedIn, setLoggedIn] = useAtom(isLoggedIn);
   if (LoggedIn === false) {
-    navigate("/landingpage");
+    navigate("/");
   }
   const { data, error } = useGetAxios("/user/profile");
-  if (!data || error) return <div> no user neededData {error}</div>;
-  const setdata = useSetAtom(userObject);
-  setdata(data);
+
+  if (!data || error) {
+    setLoggedIn(false);
+    return <div> no user neededData {error}</div>;
+  }
+  console.log(error.code);
+  // const setdata = useSetAtom(userObject);
+  // setdata(data);
 
   return (
     <div className="flex ">

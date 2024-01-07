@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import { isLoggedIn } from "../jotai/statusStates";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 const Header = () => {
-  const amIloggedIn = useAtom(isLoggedIn);
-
+  const amIloggedIn = useAtomValue(isLoggedIn);
+  console.log(amIloggedIn);
   return (
-    <header className="bg-white h-[70px] border px-3 py-4">
+    <header className="bg-white h-[70px]  border py-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
-          <h1 className="text-xl font-bold">Your Brand</h1>
+          <h1 className="text-xl font-bold">Doggy Date Care</h1>
         </Link>
         <nav>
           {amIloggedIn == false || amIloggedIn == null ? (

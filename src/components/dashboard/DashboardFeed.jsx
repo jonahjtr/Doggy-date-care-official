@@ -2,6 +2,7 @@ import React from "react";
 import ModernDogProfileCard from "./ModernDogProfileCard";
 import Calendar from "../Calendar/Calendar";
 import Header from "../Header";
+import UpComingEvents from "./UpComingEvents";
 
 const DashboardFeed = ({ data }) => {
   if (!data.dogs || data.dogs.length === 0)
@@ -11,14 +12,14 @@ const DashboardFeed = ({ data }) => {
     <div className={`min-h-screen`}>
       <Header />
       <main
-        className={`flex flex-col mobileBP:flex-row bg-primary  mobileBP:h-[calc(100vh_-_70px)]`}
+        className={`flex flex-col mobileBP:flex-row bg-white  mobileBP:h-[calc(100vh_-_70px)]`}
       >
         <section className={`flex flex-col mobileBP:w-1/2 `}>
-          <div className={`mobileBP:h-2/5 border `}>
-            <div className={`p-8 md:p-0`}>hello, welcome back</div>
+          <div className={`mobileBP:h-2/5   flex justify-center items-center `}>
+            <div className="w-4/5 bg-grey h-2/3">hello, welcome back</div>
           </div>
-          <div className={`mobileBP:h-3/5 border  flex items-center `}>
-            <div className="w-4/5 mobileBP:h-5/6 max-h-[50vh]  mx-auto overflow-y-auto">
+          <div className={`mobileBP:h-3/5   flex items-center `}>
+            <div className="w-4/5 mobileBP:h-5/6 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
               {data.dogs.map((dog, index) => (
                 <ModernDogProfileCard key={index} dog={dog} />
               ))}
@@ -26,10 +27,10 @@ const DashboardFeed = ({ data }) => {
           </div>
         </section>
         <section className={`flex   flex-col mobileBP:w-1/2  `}>
-          <div className={`mobileBP:h-2/5 border `}>
-            <div>dates list</div>
+          <div className={`mobileBP:h-2/5   flex justify-center items-center `}>
+            <UpComingEvents events={data.date_events} />
           </div>
-          <div className={`mobileBP:h-3/5 flex items-center border`}>
+          <div className={`mobileBP:h-3/5 flex items-center `}>
             <div className=" rounded-2xl  w-4/5 h-4/5 mx-auto overflow-y-hidden">
               <Calendar datesList={data.date_events} />
             </div>
