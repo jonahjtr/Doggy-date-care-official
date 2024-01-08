@@ -4,13 +4,15 @@ import CreateModal from "../modals/CreateModal";
 import FileUpload from "../../forms/FileUpload";
 import useClickOutside from "../../../hooks/clickOutside";
 
-const PhotoViews = ({ photoList, dogId }) => {
+const PhotoViews = ({ dogId, props }) => {
+  console.log(props.data);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const componentRef = useRef(null);
   const deleteRef = useRef(null);
 
+  const photoList = props.data;
   const openModal = (photo) => {
     setSelectedPhoto(photo);
     setIsModalOpen(true);
@@ -43,81 +45,142 @@ const PhotoViews = ({ photoList, dogId }) => {
   const snippet = Array.isArray(photoList) ? photoList : [];
   const first8Photos = snippet.slice(0, 8);
 
+  // <CreateModal
+  //   url={`photos/profile/${dogId}`}
+  //   title="profile photo"
+  //   component={<FileUpload />}
+  // />;
+
   return (
-    <section
-      ref={componentRef}
-      className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  "
-    >
-      <CreateModal
-        url={`photos/profile/${dogId}`}
-        title="profile photo"
-        component={<FileUpload />}
-      />
-      <CreateModal
-        url={`photos/${dogId}`}
-        title="Photos"
-        component={<FileUpload />}
-      />
+    <div className="w-full h-full   ">
+      <div className="overflow-hidden h-full  flex justify-center ">
+        <div
+          className={
+            isModalOpen
+              ? "hidden"
+              : "h-[90%] w-full mx-auto  bg-white  rounded-xl grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 no-scrollbar overflow-y-auto "
+          }
+        >
+          {first8Photos.length > 0 ? (
+            first8Photos.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => openModal(item)}
+                  className=" cursor-pointer  pt-3 px-2 "
+                >
+                  <img
+                    className="  w-full rounded-xl shadow-2xl"
+                    src={item.photo_url}
+                    alt=""
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div>no photos</div>
+          )}
+        </div>
 
-      <div className="w-full h-5/6 mb-3">
-        <div className="overflow-hidden h-full  flex justify-center items-center">
-          <div
-            className={
-              isModalOpen
-                ? "h-full bg-white w-[30%] sm:w-[60%] rounded-s-xl  p-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  no-scrollbar overflow-y-scroll"
-                : "h-full  bg-white px-4 pb-3  grid rounded-xl grid-cols-2 md:grid-cols-3 lg:grid-cols-3  no-scrollbar overflow-y-scroll"
-            }
-          >
-            {first8Photos.length > 0 ? (
-              first8Photos.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() => openModal(item)}
-                    className="relative cursor-pointer w-full  pt-3 px-2 "
-                  >
-                    <img
-                      className=" w-full rounded-xl shadow-2xl"
-                      src={item.photo_url}
-                      alt=""
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <div>no photos</div>
-            )}
-          </div>
-
-          {/* Modal Overlay */}
-          {isModalOpen && selectedPhoto && (
-            <div className=" h-[100%] w-full flex justify-center bg-black ">
-              <div className="bg-white p-2 w-full h-full rounded-e-lg  ">
-                <button className="" onClick={closeModal}>
+        {/* Modal Overlay */}
+        {isModalOpen && selectedPhoto && (
+          <div className=" h-full border w-[75%] flex justify-center  ">
+            <div className="bg-white flex justify-between p-2 w-full h-full rounded-e-lg  ">
+              <img
+                className=" h-[90%] rounded-2xl  "
+                src={selectedPhoto.photo_url}
+                alt=""
+              />
+              <div className="border flex flex-col">
+                <button className="border rounded-xl px-1" onClick={closeModal}>
                   Close
                 </button>
                 {confirmDelete ? (
-                  <button ref={deleteRef} className="" onClick={handleDelete}>
+                  <button
+                    className="border whitespace-nowrap rounded-xl px-1"
+                    ref={deleteRef}
+                    onClick={handleDelete}
+                  >
                     are you sure?
                   </button>
                 ) : (
-                  <button className="" onClick={() => setConfirmDelete(true)}>
+                  <button
+                    className="border rounded-xl px-1"
+                    onClick={() => setConfirmDelete(true)}
+                  >
                     delete
                   </button>
                 )}
-
-                <img
-                  className=" h-[90%] rounded-2xl  "
-                  src={selectedPhoto.photo_url}
-                  alt=""
-                />
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 };
 
 export default PhotoViews;
+
+// <div className="w-full h-[90%] mt-2  ">
+//   <div className="overflow-hidden h-full  flex justify-center ">
+//     <div
+//       className={
+//         isModalOpen
+//           ? "h-full bg-white rounded-s-xl   no-scrollbar overflow-y-scroll"
+//           : "h-[90%] w-full  bg-white  rounded-xl flex flex-wrap  no-scrollbar overflow-y-auto "
+//       }
+//     >
+//       {first8Photos.length > 0 ? (
+//         first8Photos.map((item, index) => {
+//           return (
+//             <div
+//               key={index}
+//               onClick={() => openModal(item)}
+//               className=" cursor-pointer  pt-3 px-2 "
+//             >
+//               <img
+//                 className=" w-[10vw] rounded-xl shadow-2xl"
+//                 src={item.photo_url}
+//                 alt=""
+//               />
+//             </div>
+//           );
+//         })
+//       ) : (
+//         <div>no photos</div>
+//       )}
+//     </div>
+
+//     {/* Modal Overlay */}
+//   </div>
+// </div>;
+
+//selected photo thing
+
+//  {
+//    isModalOpen && selectedPhoto && (
+//      <div className=" h-[100%] w-full flex justify-center bg-black ">
+//        <div className="bg-white p-2 w-full h-full rounded-e-lg  ">
+//          <button className="" onClick={closeModal}>
+//            Close
+//          </button>
+//          {confirmDelete ? (
+//            <button ref={deleteRef} className="" onClick={handleDelete}>
+//              are you sure?
+//            </button>
+//          ) : (
+//            <button className="" onClick={() => setConfirmDelete(true)}>
+//              delete
+//            </button>
+//          )}
+
+//          <img
+//            className=" h-[90%] rounded-2xl  "
+//            src={selectedPhoto.photo_url}
+//            alt=""
+//          />
+//        </div>
+//      </div>
+//    );
+//  }

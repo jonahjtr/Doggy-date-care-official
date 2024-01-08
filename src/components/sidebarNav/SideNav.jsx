@@ -17,9 +17,9 @@ const SideNav = () => {
   const { pathname } = location;
 
   return (
-    <div class="hidden md:inline max-w-[255.99px] min-h-screen flex flex-col grow  antialiased  ">
-      <div class="fixed bg-primary flex flex-col  top-0 left-0 w-64 h-full ">
-        <div class="flex items-center justify-center h-14 ">
+    <div class="hidden md:inline max-w-[255.99px] min-h-screen flex flex-col grow   antialiased  ">
+      <div class="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
+        <div class="flex  items-center justify-center h-14 ">
           <div>Logo here </div>
         </div>
         <div class="overflow-y-auto  flex flex-col justify-between overflow-x-hidden flex-grow ">

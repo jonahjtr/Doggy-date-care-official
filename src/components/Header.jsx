@@ -5,9 +5,8 @@ import { isLoggedIn } from "../jotai/statusStates";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 const Header = () => {
   const amIloggedIn = useAtomValue(isLoggedIn);
-  console.log(amIloggedIn);
   return (
-    <header className="bg-white h-[70px]  border py-4">
+    <header className="bg-white  h-[70px] max-h-[8vh]   border py-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
           <h1 className="text-xl font-bold">Doggy Date Care</h1>
