@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { isLoggedIn } from "../../jotai/statusStates";
+import { useAtom } from "jotai";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoggedInAtom, setIsLoggedIn] = useAtom(isLoggedIn);
 
   const handleLogin = async () => {
     try {
@@ -17,6 +20,7 @@ const LoginForm = () => {
       const token = response.data.token;
       localStorage.setItem("loggedIn", true);
       localStorage.setItem("token", token);
+      setIsLoggedIn(true);
 
       window.location.href = "/dashboard";
     } catch (error) {
@@ -27,7 +31,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className=" mr-18 min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="mr-18 min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-4">Login</h2>
         {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
@@ -59,7 +63,7 @@ const LoginForm = () => {
           <button
             type="button"
             onClick={handleLogin}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-blue-500px-4 py-2 rounded-md hover:bg-blue-600"
           >
             Login
           </button>

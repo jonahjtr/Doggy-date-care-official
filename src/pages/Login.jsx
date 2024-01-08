@@ -1,12 +1,14 @@
 import React from "react";
 import LoginForm from "../components/forms/LoginForm";
+import { isLoggedIn } from "../jotai/statusStates";
 import { useAtom } from "jotai";
 const Login = () => {
+  const [isLoggedInAtom, setIsLoggedIn] = useAtom(isLoggedIn);
   const logout = () => {
     // Clear authentication information
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    useAtomValue(isLoggedIn, true);
+    setIsLoggedIn(false);
     alert("logged out");
     // Redirect or perform other logout actions
     // For example, redirecting to the login page

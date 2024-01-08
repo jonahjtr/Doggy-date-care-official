@@ -21,6 +21,7 @@
     "date-fns-tz": "^2.0.0",
     "dayjs": "^1.11.10",
     "flowbite-datepicker": "^1.2.6",
+    "flowbite-react": "^0.7.2",
     "jotai": "^2.6.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
