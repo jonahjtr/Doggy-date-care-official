@@ -67,7 +67,7 @@ const CalDays = (props) => {
       {Array.from({ length: daysInMonth }, (_, i) => (
         <div
           key={i + 1}
-          className={`border h-[5vh] flex cursor-pointer ${
+          className={` h-[5vh] flex cursor-pointer ${
             selectedDate.getDate() === i + 1 &&
             selectedDate.getMonth() === selectedDate.getMonth() &&
             selectedDate.getFullYear() === selectedDate.getFullYear()
@@ -87,7 +87,7 @@ const CalDays = (props) => {
           <p className="border w-full">{i + 1}</p>
 
           {highlightedDays.includes(i + 1) && (
-            <PetsOutlinedIcon className="pr-1" color="primary" />
+            <PetsOutlinedIcon className="pr-1 text-orange" />
           )}
         </div>
       ))}

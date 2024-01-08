@@ -1,18 +1,16 @@
 import React from "react";
-import { PageNameAtom } from "../../jotai/statusStates";
-import { useAtom } from "jotai";
 
-const SideBarButton = ({ buttonName, icon }) => {
-  const [currentPage, setCurrentPage] = useAtom(PageNameAtom);
-
+const SideBarButton = ({ buttonName, icon, currentPage, pathName }) => {
   return (
     <div
-      onClick={() => setCurrentPage(buttonName)}
       className={`bg-${
-        currentPage === buttonName ? "white" : "none"
-      } rounded-l-xl`}
+        currentPage === pathName ? "white" : "none"
+      } ml-2 rounded-l-xl`}
     >
-      <a href="#" className="relative flex flex-row items-center h-11 pr-6">
+      <a
+        href={pathName}
+        className="relative flex flex-row items-center h-11 pr-6"
+      >
         <span className="inline-flex  ml-4">{icon}</span>
         <span className="ml-2 text-sm tracking-wide truncate">
           {buttonName}

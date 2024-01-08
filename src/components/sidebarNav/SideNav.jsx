@@ -1,7 +1,7 @@
 import React from "react";
 import SideBarButton from "./sideBarButton";
-import { useAtomValue } from "jotai";
-import { PageNameAtom } from "../../jotai/statusStates";
+import { Route, Link, Routes, useLocation } from "react-router-dom";
+
 import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PetsSharpIcon from "@mui/icons-material/PetsSharp";
@@ -11,8 +11,10 @@ import CalendarMonthSharpIcon from "@mui/icons-material/CalendarMonthSharp";
 import AccountBoxSharpIcon from "@mui/icons-material/AccountBoxSharp";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
+
 const SideNav = () => {
-  const pageName = useAtomValue(PageNameAtom);
+  const location = useLocation();
+  const { pathname } = location;
 
   return (
     <div class="hidden md:inline max-w-[255.99px] min-h-screen flex flex-col grow  antialiased  ">
@@ -27,42 +29,44 @@ const SideNav = () => {
               <div className="w-[75px] h-[75px] rounded-full border mx-auto"></div>
               <h1 className="mx-auto w-fit"> name here</h1>
             </div>
-            <div class="flex flex-row items-center h-8">
+            <div class="flex pl-2  flex-row items-center h-8">
               <div class=" font-light tracking-wide ">Pages</div>
             </div>
             <SideBarButton
               icon={<HomeSharpIcon />}
-              currentPage={pageName}
+              pathName={"/dashboard"}
+              currentPage={pathname}
               buttonName={"Dashboard"}
             />
             <SideBarButton
               icon={<PetsSharpIcon />}
-              currentPage={pageName}
+              pathName={"/dog-profile"}
+              currentPage={pathname}
               buttonName={"Dogs"}
             />
             <SideBarButton
               icon={<PhotoLibrarySharpIcon />}
-              currentPage={pageName}
+              currentPage={pathname}
               buttonName={"Photos"}
             />
             <SideBarButton
               icon={<MedicationSharpIcon />}
-              currentPage={pageName}
+              currentPage={pathname}
               buttonName={"Medicine"}
             />
             <SideBarButton
               icon={<CalendarMonthSharpIcon />}
-              currentPage={pageName}
+              currentPage={pathname}
               buttonName={"Dates"}
             />
             <SideBarButton
               icon={<FileCopySharpIcon />}
-              currentPage={pageName}
+              currentPage={pathname}
               buttonName={"Files"}
             />
           </section>
           <section>
-            <div class="flex flex-row items-center h-8">
+            <div class="flex pl-2 flex-row items-center h-8">
               <div class="text-sm font-light text-center tracking-wide ">
                 Settings
               </div>
@@ -70,13 +74,19 @@ const SideNav = () => {
 
             <SideBarButton
               icon={<SettingsSharpIcon />}
+              currentPage={pathname}
               buttonName={"settings"}
             />
             <SideBarButton
               icon={<AccountBoxSharpIcon />}
+              currentPage={pathname}
               buttonName={"account"}
             />
-            <SideBarButton icon={<LogoutSharpIcon />} buttonName={"logout"} />
+            <SideBarButton
+              currentPage={pathname}
+              icon={<LogoutSharpIcon />}
+              buttonName={"logout"}
+            />
           </section>
         </div>
       </div>

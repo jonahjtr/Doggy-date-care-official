@@ -3,10 +3,12 @@ import ModernDogProfileCard from "./ModernDogProfileCard";
 import Calendar from "../Calendar/Calendar";
 import Header from "../Header";
 import UpComingEvents from "./UpComingEvents";
+import { Spinner } from "flowbite-react";
+import LoadingComponent from "../utils/LoadingComponent";
 
 const DashboardFeed = ({ data }) => {
-  if (!data.dogs || data.dogs.length === 0)
-    return <div> no user neededData</div>;
+  // if (!data.dogs || data.dogs.length === 0)
+  //   return <div> no user neededData</div>;
   const mView = "md:";
   return (
     <div className={`min-h-screen`}>
@@ -16,23 +18,41 @@ const DashboardFeed = ({ data }) => {
       >
         <section className={`flex flex-col mobileBP:w-1/2 `}>
           <div className={`mobileBP:h-2/5   flex justify-center items-center `}>
-            <div className="w-4/5 bg-grey h-2/3">hello, welcome back</div>
+            <div className="w-4/5 px-3 bg-grey rounded-2xl h-2/3">
+              hello, welcome back
+            </div>
           </div>
-          <div className={`mobileBP:h-3/5   flex items-center `}>
-            <div className="w-4/5 mobileBP:h-5/6 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
-              {data.dogs.map((dog, index) => (
-                <ModernDogProfileCard key={index} dog={dog} />
-              ))}
+          <div className={`mobileBP:h-3/5 flex items-center `}>
+            <div className="w-4/5 rounded-2xl mobileBP:h-4/5 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
+              {!data.dogs || data.dogs.length === 0 ? (
+                <div className="flex h-full w-full justify-center items-center">
+                  <LoadingComponent />
+                </div>
+              ) : (
+                data.dogs.map((dog, index) => (
+                  <ModernDogProfileCard key={index} dog={dog} />
+                ))
+              )}
             </div>
           </div>
         </section>
         <section className={`flex   flex-col mobileBP:w-1/2  `}>
-          <div className={`mobileBP:h-2/5   flex justify-center items-center `}>
-            <UpComingEvents events={data.date_events} />
+          <div className={` mobileBP:h-2/5 flex justify-center items-center `}>
+            {!data.dogs || data.dogs.length === 0 ? (
+              <div className="flex h-full w-full justify-center items-center">
+                <LoadingComponent />
+              </div>
+            ) : (
+              <UpComingEvents events={data.date_events} />
+            )}
           </div>
           <div className={`mobileBP:h-3/5 flex items-center `}>
             <div className=" rounded-2xl  w-4/5 h-4/5 mx-auto overflow-y-hidden">
-              <Calendar datesList={data.date_events} />
+              <Calendar
+                datesList={
+                  !data.dogs || data.dogs.length === 0 ? [] : data.date_events
+                }
+              />
             </div>
           </div>
         </section>
@@ -42,22 +62,3 @@ const DashboardFeed = ({ data }) => {
 };
 
 export default DashboardFeed;
-// <div className="w-full mx-auto max-w-[480px] md:max-w-full overflow-x-none h-screen md:grid grid-cols-12">
-//   <main className="col-span-10 md:grid md:grid-rows-6 md:grid-cols-12 min-h-screen w-full gap-y-20">
-//     <div className=" col-start-2  col-span-full row-span-1 ">
-//       <Header />
-//     </div>
-//     <div className="rounded-xl max-h-[50vh] col-start-2 col-span-4 row-start-2 row-span-2 bg-grey text-center">
-//       <div className="p-8 md:p-0">hello, welcome back</div>
-//     </div>
-//     <div className="rounded-xl max-h-[50vh] col-start-2 no-scrollbar col-span-4 row-start-4 row-span-4 flex flex-col overflow-y-scroll mb-10">
-//       {data.dogs.map((dog, index) => (
-//         <ModernDogProfileCard key={index} dog={dog} />
-//       ))}
-//     </div>
-//     <Calendar datesList={data.date_events} />
-//     <div className="rounded-xl col-start-7 col-span-6 row-start-2 row-span-2 bg-grey text-center">
-//       upcoming
-//     </div>
-//   </main>
-// </div>
