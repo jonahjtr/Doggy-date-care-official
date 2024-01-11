@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import Header from "../components/Header";
 import AboutSection from "../landingPage/AboutSection";
 import DescriptionSection from "../landingPage/DescriptionSection";
 import BenefitsSection from "../landingPage/BenefitsSection";
+import useCheckToken from "../components/utils/useCheckToken";
 
 function LandingPage() {
-  const navigate = useNavigate();
+  const isLoggedIn = useCheckToken();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn === "true") {
-      navigate("/dashboard");
+    if (isLoggedIn === true) {
+      window.location.replace("/dashboard");
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <div>

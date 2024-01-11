@@ -1,4 +1,4 @@
-const useLogout = (dog_id) => {
+const useLogout = () => {
   localStorage.removeItem("loggedIn");
   localStorage.removeItem("token");
   window.location.href = "/";

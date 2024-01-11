@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import ModernDogProfileCard from "./ModernDogProfileCard";
 import Calendar from "../Calendar/Calendar";
 import Header from "../Header";
 import UpComingEvents from "./UpComingEvents";
-import { Spinner } from "flowbite-react";
 import LoadingComponent from "../utils/LoadingComponent";
 
-const DashboardFeed = ({ data }) => {
-  // if (!data.dogs || data.dogs.length === 0)
-  //   return <div> no user neededData</div>;
-  const mView = "md:";
+const DashboardFeed = ({ data, isLoading }) => {
+  const [dogs, setDogs] = useState([]);
+
   return (
     <div className={`min-h-screen`}>
       <Header />
@@ -49,6 +47,7 @@ const DashboardFeed = ({ data }) => {
           <div className={`mobileBP:h-3/5 flex items-center `}>
             <div className=" rounded-2xl  w-4/5 h-4/5 mx-auto overflow-y-hidden">
               <Calendar
+                dashboard={true}
                 datesList={
                   !data.dogs || data.dogs.length === 0 ? [] : data.date_events
                 }

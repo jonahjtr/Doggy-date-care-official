@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
-import CreateModal from "../modals/CreateModal";
+import CreateModal from "./modals/CreateModal";
 import MedCreate from "../../forms/MedCreate";
-import EditModal from "../modals/EditModal";
+import EditModal from "./modals/EditModal";
 import useDeleteAxios from "../../../hooks/axios/useDeleteAxios";
 import useClickOutside from "../../../hooks/clickOutside";
+import LoadingComponent from "../../utils/LoadingComponent";
 
-const MedsListViews = ({ medicineList, dogId }) => {
+const MedsViewCard = ({ medicineList, dogId, loading }) => {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -38,35 +39,47 @@ const MedsListViews = ({ medicineList, dogId }) => {
     }
   };
 
-  if (
-    !medicineList ||
-    medicineList.length === 0 ||
-    medicineList[0].id === null
-  ) {
-    return (
-      <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center ">
+  // if (
+  //   !medicineList ||
+  //   medicineList.length === 0 ||
+  //   medicineList[0].id === null
+  // ) {
+  //   return (
+  //     <section className="  bg-primary w-[90%] h-full mx-auto   p-2 rounded-2xl flex flex-col justify-evenly items-center  ">
+  //       <div className="w-full h-1/5">
+  //         <CreateModal
+  //           url={`/dogs/medicine/${dogId}`}
+  //           title="Medicines"
+  //           component={<MedCreate />}
+  //         />
+  //       </div>
+  //       <div className="w-full rounded-xl h-4/5 bg-white">
+  //         No meds on record.
+  //       </div>
+  //     </section>
+  //   );
+  // }
+
+  return (
+    <section className="  bg-primary w-[90%] h-full mx-auto   p-2 rounded-2xl flex flex-col justify-evenly items-center  ">
+      <div className="w-full h-1/5">
         <CreateModal
           url={`/dogs/medicine/${dogId}`}
           title="Medicines"
           component={<MedCreate />}
         />
-        <div className=" w-full border flex justify-center items-center rounded-2xl h-4/5 mb-3">
-          No meds on record.
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="lg:mx-4 shadow-xl w-full bg-primary  h-[350px] sm:w-[90%] max-w-[600px] sm:h-[500px]  mx-auto p-2 px-4 rounded-3xl mt-0 my-5 flex flex-col justify-evenly items-center  ">
-      <CreateModal
-        url={`/dogs/medicine/${dogId}`}
-        title="Medicines"
-        component={<MedCreate />}
-      />
-      <div className=" py-2 rounded-xl w-full border h-4/5 mb-3">
-        <div className="h-full overflow-y-scroll">
-          {medicineList.map((medicine, index) => (
+      </div>
+      <div className="w-full rounded-xl h-4/5 bg-white">
+        {loading ? (
+          <LoadingComponent />
+        ) : !medicineList ||
+          medicineList.length === 0 ||
+          medicineList[0].id === null ? (
+          <div className="flex justify-center items-center">
+            no meds to display
+          </div>
+        ) : (
+          medicineList.map((medicine, index) => (
             <div key={index} className="bg-white p-2 rounded shadow">
               <h2 className="text-sm font-semibold mb-1">{medicine.name}</h2>
               <p className="text-xs mb-1">Dosage: {medicine.dosage}</p>
@@ -90,20 +103,18 @@ const MedsListViews = ({ medicineList, dogId }) => {
                 <button onClick={() => setConfirmDelete(true)}>delete</button>
               )}
             </div>
-          ))}
-        </div>
-        {isModalVisible && (
-          <EditModal
-            medicine={selectedMedicine}
-            onSave={handleEditSave}
-            onClose={handleEditClose}
-          />
+          ))
         )}
       </div>
+      {isModalVisible && (
+        <EditModal
+          medicine={selectedMedicine}
+          onSave={handleEditSave}
+          onClose={handleEditClose}
+        />
+      )}
     </section>
   );
 };
 
-export default MedsListViews;
-
-// handleDelete(medicine.id);
+export default MedsViewCard;

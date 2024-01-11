@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { isLoggedIn } from "../../jotai/statusStates";
+import { isLoggedInAtom } from "../../jotai/statusStates";
 import { useAtom } from "jotai";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedInAtom, setIsLoggedIn] = useAtom(isLoggedIn);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
 
   const handleLogin = async () => {
     try {
@@ -29,6 +31,10 @@ const LoginForm = () => {
       setErrorMessage(`invalid email or password ${error}`);
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or any other loading indicator
+  }
 
   return (
     <div className="mr-18 min-h-screen flex items-center justify-center bg-gray-50">

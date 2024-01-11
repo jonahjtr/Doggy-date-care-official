@@ -6,7 +6,6 @@ function Banner({ data }) {
   if (data.dog_date_of_birth) {
     outputDateOfBirth = new Date(data.dog_date_of_birth).toLocaleDateString();
   }
-  console.log("banner", data);
 
   return (
     <div className="relative  min-h-[150px] h-1/5">

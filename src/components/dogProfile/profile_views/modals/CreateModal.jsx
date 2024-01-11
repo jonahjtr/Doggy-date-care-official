@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ViewHeader from "../profile_views/components/ViewHeader";
+import ViewHeader from "./ViewHeader";
 
 const CreateModal = (props) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
