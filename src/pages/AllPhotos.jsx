@@ -28,7 +28,7 @@ const AllPhotos = () => {
             {photosList.map((photo, index) => {
               if (index < 5) return <div key={index}>bad image url</div>;
               return (
-                <div className=" " key={index}>
+                <div className="" key={index}>
                   <img
                     className="w-[100px] mx-4 h-[100px]"
                     src={photo.photo_url}

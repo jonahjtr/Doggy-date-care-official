@@ -9,12 +9,14 @@ import AllPhotos from "./pages/AllPhotos";
 import AllDogs from "./pages/AllDogs";
 import AllDates from "./pages/AllDates";
 import AllFiles from "./pages/AllFiles";
+import CreateDog from "./pages/CreateDog";
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/create-account" element={<CreateAccount />} />
+      <Route path="/create-dog" element={<CreateDog />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dog-profile" element={<DogProfile />} />
       <Route path="/all-photos" element={<AllPhotos />} />

@@ -27,7 +27,7 @@ const SideNav = () => {
 
   return (
     <div className="hidden max-h-screen relative md:inline max-w-[255.99px] min-h-screen flex flex-col grow   antialiased  ">
-      <div className="  bg-primary flex flex-col fixed top-0 left-0 w-64  h-full ">
+      <div className="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
         <div className="flex  items-center justify-center h-14 ">
           <div>Logo here </div>
         </div>

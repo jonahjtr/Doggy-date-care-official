@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import useDeleteAxios from "../../../hooks/axios/useDeleteAxios";
 import CreateModal from "./modals/CreateModal";
-import FileUpload from "../../forms/FileUpload";
+import PhotoUpload from "../../forms/PhotoUpload";
 import useClickOutside from "../../../hooks/clickOutside";
 import LoadingComponent from "../../utils/LoadingComponent";
 
@@ -58,10 +58,10 @@ const PhotoViewCard = ({ title, photoList, dogId, loading }) => {
         <CreateModal
           url={`photos/${dogId}`}
           title={"Photos"}
-          component={<FileUpload />}
+          component={<PhotoUpload />}
         />
       </div>
-      <div className="w-full rounded-xl h-4/5 bg-white">
+      <div className="w-full rounded-xl  max-h-[30vh] h-4/5 bg-white">
         {loading ? (
           <LoadingComponent />
         ) : (
@@ -99,7 +99,7 @@ const PhotoViewCard = ({ title, photoList, dogId, loading }) => {
 
               {/* Modal Overlay */}
               {isModalOpen && selectedPhoto && (
-                <div className=" h-full border w-[75%] flex justify-center  ">
+                <div className=" h-4/5 border w-[75%]  flex justify-center  ">
                   <div className="bg-white flex justify-between p-2 w-full h-full rounded-e-lg  ">
                     <img
                       className=" h-[90%] rounded-2xl  "

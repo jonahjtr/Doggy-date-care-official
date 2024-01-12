@@ -9,7 +9,7 @@ const CreateModal = (props) => {
   };
 
   return (
-    <div className="w-full h-fit grid grid-cols-[25%_50%_25%] border ">
+    <div className="w-full h-full grid grid-cols-[25%_50%_25%]  ">
       {/* Blurry background */}
       {isCardVisible && (
         <div className="fixed top-0 left-0 w-screen h-screen backdrop-filter backdrop-brightness-50 backdrop-blur-xl z-10"></div>
@@ -20,7 +20,7 @@ const CreateModal = (props) => {
       </div>
       <div className="  flex items-center justify-end ">
         <button onClick={toggleCard} className="h-full ">
-          <p className="font-bold"> +</p>
+          <p className="text-3xl font-semibold pr-5"> +</p>
         </button>
       </div>
 
