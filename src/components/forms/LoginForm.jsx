@@ -1,34 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { isLoggedIn } from "../../jotai/statusStates";
-import { useAtom } from "jotai";
+import useCheckToken from "../utils/useCheckToken";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoggedInAtom, setIsLoggedIn] = useAtom(isLoggedIn);
+  const [isLoading, setIsLoading] = useState(false);
+  const isLoggedIn = useCheckToken();
 
+  useEffect(() => {
+    if (isLoggedIn === true) {
+      window.location.replace("/dashboard");
+    }
+  }, []);
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.post("http://localhost:3000/auth/login", {
         email,
         password,
       });
       console.log(response);
       const token = response.data.token;
+      const hasDogs = response.data.hasDogs;
       localStorage.setItem("loggedIn", true);
       localStorage.setItem("token", token);
-      setIsLoggedIn(true);
-
-      window.location.href = "/dashboard";
+      setIsLoading(false);
+      if (hasDogs) {
+        window.location.href = "/dashboard";
+      } else {
+        window.location.href = "/create-dog";
+      }
     } catch (error) {
       console.log(error.response);
       console.error("Login failed:", error.response);
       setErrorMessage(`invalid email or password ${error}`);
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="mr-18 min-h-screen flex items-center justify-center bg-gray-50">

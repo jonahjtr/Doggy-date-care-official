@@ -12,7 +12,7 @@ const FlipCal = (props) => {
     console.log("lksadjlkdsfj");
   };
   return (
-    <div className="rounded-xl  text-center ">
+    <div className="rounded-xl max-w-[500px] mx-auto text-center ">
       <div className="group  perspective:1000px   ">
         <div
           className={

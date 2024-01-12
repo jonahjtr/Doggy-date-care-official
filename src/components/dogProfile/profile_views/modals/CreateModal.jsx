@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ViewHeader from "../profile_views/components/ViewHeader";
+import ViewHeader from "./ViewHeader";
 
 const CreateModal = (props) => {
   const [isCardVisible, setIsCardVisible] = useState(false);
@@ -9,18 +9,18 @@ const CreateModal = (props) => {
   };
 
   return (
-    <div className="relative w-full grid grid-cols-[25%_50%_25%] ">
+    <div className="w-full h-full grid grid-cols-[25%_50%_25%]  ">
       {/* Blurry background */}
       {isCardVisible && (
         <div className="fixed top-0 left-0 w-screen h-screen backdrop-filter backdrop-brightness-50 backdrop-blur-xl z-10"></div>
       )}
-      <div className="  "> </div>
+      <div className=" "> </div>
       <div className="flex justify-center items-center">
         <ViewHeader title={props.title} />
       </div>
-      <div className="  flex justify-end pr-4 pb-4 ">
-        <button onClick={toggleCard} className="text-3xl">
-          +
+      <div className="  flex items-center justify-end ">
+        <button onClick={toggleCard} className="h-full ">
+          <p className="text-3xl font-semibold pr-5"> +</p>
         </button>
       </div>
 

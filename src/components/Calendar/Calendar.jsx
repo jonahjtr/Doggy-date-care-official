@@ -8,7 +8,7 @@ import CalMonthYear from "./CalMonthYear";
 import CalDays from "./CalDays";
 import FlipCal from "./FlipCal";
 
-const Calendar = ({ datesList }) => {
+const Calendar = ({ datesList, dashboard }) => {
   const currentDate = new Date(); // Get the current date
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [highlightedDays, setHighlightedDays] = useState([]);
@@ -16,7 +16,6 @@ const Calendar = ({ datesList }) => {
   const [selectedDateEvents, setSelectedDateEvents] = useState([]); // Store events for the selected date
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isFlipped, setIsFlipped] = useState(false);
-
   const handleMonthChange = (event) => {
     const newMonth = parseInt(event.target.value);
     const newDate = new Date(
@@ -61,7 +60,7 @@ const Calendar = ({ datesList }) => {
       // Filter events for the selected date
       const selectedDateEvents = datesList.filter((event) => {
         const eventDate = utcToZonedTime(
-          parseISO(event.date),
+          parseISO(event.start_date_time),
           Intl.DateTimeFormat().resolvedOptions().timeZone
         );
         return isSameDay(eventDate, selectedDate);
@@ -72,7 +71,7 @@ const Calendar = ({ datesList }) => {
       const daysWithEvents = datesList
         .filter((event) => {
           const eventDate = utcToZonedTime(
-            parseISO(event.date),
+            parseISO(event.start_date_time),
             Intl.DateTimeFormat().resolvedOptions().timeZone
           );
 
@@ -83,7 +82,7 @@ const Calendar = ({ datesList }) => {
         })
         .map((event) => {
           const eventDate = utcToZonedTime(
-            parseISO(event.date),
+            parseISO(event.start_date_time),
             Intl.DateTimeFormat().resolvedOptions().timeZone
           );
           return eventDate.getDate();
@@ -104,13 +103,10 @@ const Calendar = ({ datesList }) => {
 
     window.addEventListener("resize", handleResize);
 
-    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  // windowWidth > 768 &&
 
   if (windowWidth < 1600) {
     return (
@@ -128,8 +124,12 @@ const Calendar = ({ datesList }) => {
   }
   return (
     <div className="rounded-xl p-y-10 h-[100%] bg-grey text-center ">
-      <div className="flex flex-col md:flex-row h-full ">
-        <div className=" w-full    h-full">
+      <div
+        className={`flex flex-col md:flex-row ${
+          dashboard ? `` : "xl:flex-col"
+        }  h-full`}
+      >
+        <div className=" w-full   h-full">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <div className="p-2 h-full">
               <div className="flex items-center mb-2">
@@ -150,7 +150,11 @@ const Calendar = ({ datesList }) => {
             </div>
           </LocalizationProvider>
         </div>
-        <div className="w-full border-l shadow  md:w-4/5 md:min-h-[180px] flex items-center  overflow-y-auto ">
+        <div
+          className={` ${
+            dashboard ? "" : " border h-full mx-auto pt-5 "
+          } w-full border-l shadow  md:w-4/5 md:min-h-[180px] flex items-center  overflow-y-auto `}
+        >
           <CalEvents selectedDateEvents={selectedDateEvents} />
         </div>
       </div>

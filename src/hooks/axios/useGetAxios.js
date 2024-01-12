@@ -4,6 +4,7 @@ import axios from "axios";
 const useAxios = (url) => {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const useAxios = (url) => {
 
         if (isMounted) {
           setData(response.data);
+          setLoading(false);
         }
       } catch (error) {
         if (isMounted) {
@@ -35,7 +37,7 @@ const useAxios = (url) => {
     };
   }, [url, accessToken]);
 
-  return { data, error };
+  return { data, error, loading };
 };
 
 export default useAxios;

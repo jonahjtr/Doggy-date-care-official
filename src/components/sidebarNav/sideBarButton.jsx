@@ -1,8 +1,15 @@
 import React from "react";
 
-const SideBarButton = ({ buttonName, icon, currentPage, pathName }) => {
+const SideBarButton = ({
+  buttonName,
+  icon,
+  currentPage,
+  pathName,
+  onClick,
+}) => {
   return (
     <div
+      onClick={onClick}
       className={`bg-${
         currentPage === pathName ? "white" : "none"
       } ml-2 rounded-l-xl`}

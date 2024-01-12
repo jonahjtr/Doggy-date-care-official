@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
-import { isLoggedIn } from "../jotai/statusStates";
-import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import uesCheckToken from "./utils/useCheckToken";
 const Header = () => {
-  const amIloggedIn = useAtomValue(isLoggedIn);
-  console.log(amIloggedIn);
+  const isLoggedIn = uesCheckToken();
+  const handleLogout = () => {
+    useLogout();
+  };
+  useEffect(() => {
+    if (isLoggedIn === false) {
+      window.location.replace("/login");
+    }
+  }, []);
   return (
-    <header className="bg-white h-[70px]  border py-4">
+    <header className="bg-white  h-[70px] max-h-[8vh]   border py-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/">
           <h1 className="text-xl font-bold">Doggy Date Care</h1>
         </Link>
         <nav>
-          {amIloggedIn == false || amIloggedIn == null ? (
+          {isLoggedIn == false || isLoggedIn == null ? (
             <ul className="flex space-x-4">
               <li>
                 <Link
@@ -34,7 +40,7 @@ const Header = () => {
             </ul>
           ) : (
             <ul className="flex space-x-4">
-              <li onClick={useLogout}>
+              <li onClick={handleLogout}>
                 <Link to="/">log out</Link>
               </li>
             </ul>

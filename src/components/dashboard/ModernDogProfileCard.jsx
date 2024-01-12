@@ -5,10 +5,9 @@ import { useSetAtom } from "jotai";
 
 const ModernDogProfileCard = ({ dog }) => {
   const { dog_id, dog_name, dog_profile_url } = dog;
-  const setCurrentDogIdAtom = useSetAtom(currentDogId);
 
   const handleClick = () => {
-    setCurrentDogIdAtom(dog_id);
+    localStorage.setItem("current_dog", dog_id);
     console.log(dog_id);
   };
 

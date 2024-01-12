@@ -24,8 +24,10 @@ const MedCreate = ({ url, title }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("hello");
     e.preventDefault();
     try {
+      console.log(formData);
       const response = await usePostAxios(url, formData);
 
       console.log("Response:", response);
