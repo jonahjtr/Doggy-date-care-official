@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { currentDogId } from "../../jotai/statusStates";
-import { useSetAtom } from "jotai";
 
-const ModernDogProfileCard = ({ dog }) => {
+const ModernDogProfileCard = ({ dog, index }) => {
   const { dog_id, dog_name, dog_profile_url } = dog;
 
   const handleClick = () => {

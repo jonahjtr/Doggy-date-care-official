@@ -1,6 +1,5 @@
 const useLogout = () => {
-  localStorage.removeItem("loggedIn");
-  localStorage.removeItem("token");
+  localStorage.clear();
   window.location.href = "/";
 };
 

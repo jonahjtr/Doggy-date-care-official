@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useGetAxios from "../hooks/axios/useGetAxios";
-import DashboardFeed from "../components/dashboard/DashboardFeed";
 import SideNav from "../components/sidebarNav/SideNav";
-import LoadingComponent from "../components/utils/LoadingComponent";
 import UpComingEvents from "../components/dashboard/UpComingEvents";
 import Header from "../components/Header";
 import Calendar from "../components/Calendar/Calendar";
@@ -13,16 +10,22 @@ const Dashboard = () => {
   const { data, error, loading } = useGetAxios("/user/profile");
   const [dogs, setDogs] = useState([
     { dog_id: 1, dog_name: "loading dogs", dog_profile_url: "" },
-    { dog_id: 1, dog_name: "loading dogs", dog_profile_url: "" },
   ]);
+  //set dog profile to a basic photo
+
   useEffect(() => {
     if (data.dogs) {
       setDogs(data.dogs);
+      let current_dog = localStorage.getItem("current_dog");
+      if (!current_dog) {
+        localStorage.setItem("current_dog", data.dogs[0].dog_id);
+      }
+    }
+    if (error.status === 404) {
+      dogs[0].dog_name = "No dogs found";
     }
   }, [loading]);
-  // if (loading) {
-  //   return <div> loading page </div>;
-  // }
+
   return (
     <div className="flex ">
       <SideNav />
@@ -36,14 +39,14 @@ const Dashboard = () => {
               <div
                 className={`mobileBP:h-2/5   flex justify-center items-center `}
               >
-                <div className="w-4/5 px-3 bg-grey rounded-2xl h-2/3">
+                <div className="w-4/5 px-3 bg-grey rounded-[7px] h-2/3">
                   hello, welcome back
                 </div>
               </div>
               <div className={`mobileBP:h-3/5 flex items-center `}>
                 <div className="w-4/5 rounded-2xl mobileBP:h-4/5 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
                   {dogs.map((dog, index) => (
-                    <ModernDogProfileCard key={index} dog={dog} />
+                    <ModernDogProfileCard index={index} key={index} dog={dog} />
                   ))}
                 </div>
               </div>
@@ -55,7 +58,7 @@ const Dashboard = () => {
                 {<UpComingEvents loading={loading} events={data.date_events} />}
               </div>
               <div className={`mobileBP:h-3/5 flex items-center `}>
-                <div className=" rounded-2xl  w-4/5 h-4/5 mx-auto overflow-y-hidden">
+                <div className=" rounded-2xl bg-primary  w-4/5 h-4/5 mx-auto overflow-y-hidden">
                   <Calendar
                     dashboard={true}
                     datesList={
