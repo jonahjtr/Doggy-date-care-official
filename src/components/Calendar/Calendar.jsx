@@ -9,11 +9,11 @@ import CalDays from "./CalDays";
 import FlipCal from "./FlipCal";
 
 const Calendar = ({ datesList, dashboard }) => {
-  const currentDate = new Date(); // Get the current date
+  const currentDate = new Date();
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [highlightedDays, setHighlightedDays] = useState([]);
-  const [eventsData, setEventsData] = useState([]); // Store server response data
-  const [selectedDateEvents, setSelectedDateEvents] = useState([]); // Store events for the selected date
+  const [eventsData, setEventsData] = useState([]);
+  const [selectedDateEvents, setSelectedDateEvents] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isFlipped, setIsFlipped] = useState(false);
   const handleMonthChange = (event) => {
@@ -90,7 +90,7 @@ const Calendar = ({ datesList, dashboard }) => {
 
       setHighlightedDays(daysWithEvents);
     }
-  }, [selectedDate]);
+  }, [selectedDate, datesList]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);

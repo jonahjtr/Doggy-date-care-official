@@ -6,12 +6,15 @@ const SideBarButton = ({
   currentPage,
   pathName,
   onClick,
+  extraPathName,
 }) => {
   return (
     <div
       onClick={onClick}
       className={`bg-${
-        currentPage === pathName ? "white" : "none"
+        currentPage === pathName || currentPage === extraPathName
+          ? "white"
+          : "none"
       } ml-2 rounded-l-xl`}
     >
       <a

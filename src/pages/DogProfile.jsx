@@ -24,7 +24,9 @@ const DogProfile = () => {
     setDogMeds(data.medicines);
     setDogFiles(data.dog_files);
   }, [data]);
-
+  if (error) {
+    return <div> error occured</div>;
+  }
   if (data) {
     return (
       <div className="flex h-screen ">
@@ -73,13 +75,6 @@ const DogProfile = () => {
       </div>
     );
   }
-
-  return (
-    <div>
-      <SideNav />
-      <div>Loading...</div>
-    </div>
-  );
 };
 
 export default DogProfile;

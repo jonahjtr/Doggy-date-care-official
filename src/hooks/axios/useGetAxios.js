@@ -17,7 +17,6 @@ const useAxios = (url) => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-
         if (isMounted) {
           setData(response.data);
           setLoading(false);

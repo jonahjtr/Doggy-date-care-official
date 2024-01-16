@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBarButton from "./sideBarButton";
+import DropDownButton from "./DropDownButton";
 import { useLocation } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import { useAtom } from "jotai";
@@ -16,6 +17,7 @@ import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
 
 const SideNav = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
   const location = useLocation();
   const { pathname } = location;
@@ -25,6 +27,13 @@ const SideNav = () => {
     setIsLoggedIn(false);
   };
 
+  const handleDropDown = () => {
+    setIsMenuOpen(!isMenuOpen);
+    console.log("clicked");
+  };
+  const dropDownList = ["/all-photos", "/all-meds", "/all-files"];
+  const showModule = isMenuOpen || dropDownList.includes(pathname);
+  const displayDropDown = ["/dog-profile", "/all-dogs"];
   return (
     <div className="hidden max-h-screen relative md:inline max-w-[255.99px] min-h-screen flex flex-col grow   antialiased  ">
       <div className="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
@@ -46,41 +55,55 @@ const SideNav = () => {
               currentPage={pathname}
               buttonName={"Dashboard"}
             />
-            <SideBarButton
-              pathName={"/all-dogs"}
-              icon={<PetsSharpIcon />}
-              currentPage={pathname}
-              buttonName={"All My Dogs"}
-            />
-            <SideBarButton
-              pathName={"/all-photos"}
-              icon={<PhotoLibrarySharpIcon />}
-              currentPage={pathname}
-              buttonName={"Photos"}
-            />
-            <SideBarButton
-              pathName={"/all-meds"}
-              icon={<MedicationSharpIcon />}
-              currentPage={pathname}
-              buttonName={"Medicine"}
-            />
+            {displayDropDown.includes(pathname) ||
+            dropDownList.includes(pathname) ? (
+              <DropDownButton
+                isMenuOpen={isMenuOpen}
+                pathName={"/all-dogs"}
+                extraPathName={"/dog-profile"}
+                allExtraPathNames={["/all-photos", "/all-meds", "/all-files"]}
+                currentPage={pathname}
+                onClick={handleDropDown}
+                buttonName={"Dog House"}
+              />
+            ) : (
+              <SideBarButton
+                icon={<PetsSharpIcon />}
+                pathName={"/all-dogs"}
+                currentPage={pathname}
+                buttonName={"Dog House"}
+              />
+            )}
+
+            {showModule && (
+              <div className="bg-white ml-2 rounded-bl-xl mb-2">
+                <SideBarButton
+                  pathName={"/all-photos"}
+                  icon={<PhotoLibrarySharpIcon />}
+                  currentPage={pathname}
+                  buttonName={"Photos"}
+                />
+                <SideBarButton
+                  pathName={"/all-meds"}
+                  icon={<MedicationSharpIcon />}
+                  currentPage={pathname}
+                  buttonName={"Medicine"}
+                />
+
+                <SideBarButton
+                  pathName={"/all-files"}
+                  icon={<FileCopySharpIcon />}
+                  currentPage={pathname}
+                  buttonName={"Files"}
+                />
+              </div>
+            )}
+
             <SideBarButton
               pathName={"/all-dates"}
               icon={<CalendarMonthSharpIcon />}
               currentPage={pathname}
               buttonName={"Dates"}
-            />
-            <SideBarButton
-              pathName={"/all-files"}
-              icon={<FileCopySharpIcon />}
-              currentPage={pathname}
-              buttonName={"Files"}
-            />
-            <SideBarButton
-              pathName={"/dog-profile"}
-              icon={<PetsSharpIcon />}
-              currentPage={pathname}
-              buttonName={"Doggy Profile"}
             />
           </section>
           <section>
@@ -115,3 +138,10 @@ const SideNav = () => {
 };
 
 export default SideNav;
+
+// <DropDownButton
+//   onClick={handleDropDown}
+//   icon={<HomeSharpIcon />}
+//   isMenuOpen={isMenuOpen}
+//   buttonName={"Dashboard"}
+// />
