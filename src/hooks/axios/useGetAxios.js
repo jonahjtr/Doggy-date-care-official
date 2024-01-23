@@ -25,6 +25,7 @@ const useAxios = (url) => {
         if (isMounted) {
           setError(`${error}`);
           console.error("Error fetching data:", error);
+          setLoading(false);
         }
       }
     };

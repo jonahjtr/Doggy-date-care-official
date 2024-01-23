@@ -11,20 +11,21 @@ const Dashboard = () => {
   const [dogs, setDogs] = useState([
     { dog_id: 1, dog_name: "loading dogs", dog_profile_url: "" },
   ]);
-  //set dog profile to a basic photo
+  const [events, setEvents] = useState([]);
 
+  console.log(data);
   useEffect(() => {
     if (data.dogs) {
       setDogs(data.dogs);
+      setEvents(data.date_events);
       let current_dog = localStorage.getItem("current_dog");
       if (!current_dog) {
         localStorage.setItem("current_dog", data.dogs[0].dog_id);
       }
+    } else if (error) {
+      setDogs([]);
     }
-    if (error.status === 404) {
-      dogs[0].dog_name = "No dogs found";
-    }
-  }, [loading]);
+  }, [data, error]);
 
   return (
     <div className="flex ">
@@ -45,9 +46,17 @@ const Dashboard = () => {
               </div>
               <div className={`mobileBP:h-3/5 flex items-center `}>
                 <div className="w-4/5 rounded-2xl mobileBP:h-4/5 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
-                  {dogs.map((dog, index) => (
-                    <ModernDogProfileCard index={index} key={index} dog={dog} />
-                  ))}
+                  {dogs.length == 0 ? (
+                    <div> no dogs </div>
+                  ) : (
+                    dogs.map((dog, index) => (
+                      <ModernDogProfileCard
+                        index={index}
+                        key={index}
+                        dog={dog}
+                      />
+                    ))
+                  )}
                 </div>
               </div>
             </section>
@@ -55,7 +64,7 @@ const Dashboard = () => {
               <div
                 className={` mobileBP:h-2/5 flex justify-center items-center `}
               >
-                {<UpComingEvents loading={loading} events={data.date_events} />}
+                {<UpComingEvents loading={loading} events={events} />}
               </div>
               <div className={`mobileBP:h-3/5 flex items-center `}>
                 <div className=" rounded-2xl bg-primary  w-4/5 h-4/5 mx-auto overflow-y-hidden">

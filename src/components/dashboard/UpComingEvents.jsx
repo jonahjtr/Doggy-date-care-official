@@ -1,33 +1,6 @@
 import React from "react";
 import LoadingComponent from "../utils/LoadingComponent";
 
-const events = [
-  {
-    title: "First event",
-    date: "2020-01-01",
-    day: "09",
-    description: "title",
-  },
-  {
-    title: "Second event",
-    date: "2020-02-01",
-    day: "20",
-    description: "title",
-  },
-  {
-    title: "Third event",
-    date: "2020-03-01",
-    day: "13",
-    description: "title",
-  },
-  {
-    title: "Fourth event",
-    date: "2020-04-01",
-    day: "18",
-    description: "title",
-  },
-];
-
 const UpComingEvents = ({ events, loading }) => {
   console.log(events);
   return (
@@ -36,6 +9,8 @@ const UpComingEvents = ({ events, loading }) => {
       <div className=" h-3/4 w-full p-2 pt-1">
         {loading ? (
           <LoadingComponent />
+        ) : events.length === 0 ? (
+          <div>no events</div>
         ) : (
           <div className="w-full h-full rounded-2xl  no-scrollbar pt-1 overflow-y-auto">
             {events.map((event, index) => {
