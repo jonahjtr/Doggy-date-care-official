@@ -7,7 +7,7 @@ import Calendar from "../components/Calendar/Calendar";
 import ModernDogProfileCard from "../components/dashboard/ModernDogProfileCard";
 
 const Dashboard = () => {
-  const { data, error, loading } = useGetAxios("/user/profile");
+  const { data, error, status, loading } = useGetAxios("/user/profile");
   const [dogs, setDogs] = useState([
     { dog_id: 1, dog_name: "loading dogs", dog_profile_url: "" },
   ]);
@@ -15,14 +15,15 @@ const Dashboard = () => {
 
   console.log(data);
   useEffect(() => {
-    if (data.dogs) {
+    if (status === 200) {
       setDogs(data.dogs);
       setEvents(data.date_events);
       let current_dog = localStorage.getItem("current_dog");
       if (!current_dog) {
         localStorage.setItem("current_dog", data.dogs[0].dog_id);
       }
-    } else if (error) {
+    } else {
+      console.log(error);
       setDogs([]);
     }
   }, [data, error]);
