@@ -23,7 +23,10 @@ const Dashboard = () => {
         localStorage.setItem("current_dog", data.dogs[0].dog_id);
       }
     } else {
-      console.log(error); //this is message that responds back for the error
+      if (data.statusText === "Unauthorized") {
+        console.log("sadlfjksldfj");
+      }
+      console.log("status text", error); //this is message that responds back for the error
       setDogs([]);
     }
   }, [data, error]);

@@ -12,12 +12,18 @@ const Header = () => {
       window.location.replace("/login");
     }
   }, []);
+  //make hamburger menu
   return (
     <header className="bg-white  h-[70px] max-h-[8vh]   border py-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/">
-          <h1 className="text-xl font-bold">Doggy Date Care</h1>
-        </Link>
+        <div className="flex justify-start items-center">
+          <button onClick={console.log("sl")} className="mx-4 md:hidden">
+            ///{" "}
+          </button>
+          <Link to="/">
+            <h1 className="text-xl font-bold">Doggy Date Care</h1>
+          </Link>
+        </div>
         <nav>
           {isLoggedIn == false || isLoggedIn == null ? (
             <ul className="flex space-x-4">

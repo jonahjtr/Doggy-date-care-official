@@ -27,7 +27,12 @@ const useAxios = (url) => {
       } catch (error) {
         if (isMounted) {
           setError(`${error.response.data.message}`);
-          // console.error(error.response);
+          console.error(error.response);
+          if (error.response.statusText == "Unauthorized") {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }
+          console.log(error.response.statusText);
           setStatus(error.response.status);
           setLoading(false);
         }
