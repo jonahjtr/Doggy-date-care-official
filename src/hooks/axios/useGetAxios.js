@@ -5,6 +5,8 @@ const useAxios = (url) => {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("");
+
   const accessToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -19,12 +21,20 @@ const useAxios = (url) => {
         });
         if (isMounted) {
           setData(response.data);
+          setStatus(response.status);
           setLoading(false);
         }
       } catch (error) {
         if (isMounted) {
-          setError(`${error}`);
-          console.error("Error fetching data:", error);
+          setError(`${error.response.data.message}`);
+          console.error(error.response);
+          if (error.response.statusText == "Unauthorized") {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }
+          console.log(error.response.statusText);
+          setStatus(error.response.status);
+          setLoading(false);
         }
       }
     };
@@ -36,7 +46,7 @@ const useAxios = (url) => {
     };
   }, [url, accessToken]);
 
-  return { data, error, loading };
+  return { data, error, status, loading };
 };
 
 export default useAxios;

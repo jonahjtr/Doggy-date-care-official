@@ -35,9 +35,9 @@ const CreateDog = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/dogs",
-        {
-          allValues,
-        },
+
+        allValues,
+
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
