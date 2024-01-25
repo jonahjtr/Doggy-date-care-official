@@ -6,3 +6,4 @@ export const userObject = atomWithStorage("userInfo", {});
 export const currentDogId = atomWithStorage("currentDogId", null);
 export const currentDogProfile = atomWithStorage("currentDogProfile", {});
 export const PageNameAtom = atomWithStorage("pageName", "Dashboard");
+export const isOpenAtom = atomWithStorage("isOpen", false);

@@ -11,9 +11,9 @@ const Dashboard = () => {
   const [dogs, setDogs] = useState([
     { dog_id: 1, dog_name: "loading dogs", dog_profile_url: "" },
   ]);
+
   const [events, setEvents] = useState([]);
 
-  console.log(data);
   useEffect(() => {
     if (status === 200) {
       setDogs(data.dogs);
@@ -26,7 +26,7 @@ const Dashboard = () => {
       if (data.statusText === "Unauthorized") {
         console.log("sadlfjksldfj");
       }
-      console.log("status text", error); //this is message that responds back for the error
+      console.log("status text", error);
       setDogs([]);
     }
   }, [data, error]);
