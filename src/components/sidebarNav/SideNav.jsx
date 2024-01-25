@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBarButton from "./sideBarButton";
 import DropDownButton from "./DropDownButton";
 import { useLocation } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
 import { useAtom } from "jotai";
-import { isLoggedInAtom } from "../../jotai/statusStates";
+import { isLoggedInAtom, isOpenAtom } from "../../jotai/statusStates";
 
 import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
@@ -16,7 +16,8 @@ import AccountBoxSharpIcon from "@mui/icons-material/AccountBoxSharp";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import FileCopySharpIcon from "@mui/icons-material/FileCopySharp";
 
-const SideNav = () => {
+const SideNav = ({ open }) => {
+  const [isOpen, setIsOpen] = useAtom(isOpenAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
   const location = useLocation();
@@ -27,15 +28,23 @@ const SideNav = () => {
     setIsLoggedIn(false);
   };
 
+  useEffect(() => {
+    console.log("sldkfjklsdfldakfjdf");
+    console.log(isOpen);
+  }, [isOpen]);
+
   const handleDropDown = () => {
     setIsMenuOpen(!isMenuOpen);
-    console.log("clicked");
   };
   const dropDownList = ["/all-photos", "/all-meds", "/all-files"];
   const showModule = isMenuOpen || dropDownList.includes(pathname);
   const displayDropDown = ["/dog-profile", "/all-dogs"];
   return (
-    <div className="hidden max-h-screen relative md:inline max-w-[255.99px] min-h-screen flex flex-col grow   antialiased  ">
+    <div
+      className={`${
+        isOpen === true ? "" : "hidden "
+      } md:inline  max-h-screen relative max-w-[255.99px] min-h-screen flex flex-col grow   antialiased `}
+    >
       <div className="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
         <div className="flex  items-center justify-center h-14 ">
           <div>Logo here </div>
