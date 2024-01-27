@@ -41,9 +41,12 @@ const SideNav = ({ open }) => {
   const displayDropDown = ["/dog-profile", "/all-dogs"];
   return (
     <div
-      className={`${
-        isOpen === true ? "" : "hidden "
-      } md:inline  max-h-screen relative max-w-[255.99px] min-h-screen flex flex-col grow   antialiased `}
+      className={`fixed top-0 left-0 w-64 h-full bg-primary transition-transform transform ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+      style={{
+        zIndex: 9999,
+      }}
     >
       <div className="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
         <div className="flex  items-center justify-center h-14 ">

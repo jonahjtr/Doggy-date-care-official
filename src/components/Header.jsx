@@ -22,7 +22,6 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  //make hamburger menu
   return (
     <header className="bg-white  h-[70px] max-h-[8vh]   border py-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -30,7 +29,7 @@ const Header = () => {
           <button onClick={handleClick} className="mx-4 md:hidden">
             ///
           </button>
-          <Link to="/">
+          <Link to={"/"}>
             <h1 className="text-xl font-bold">Doggy Date Care</h1>
           </Link>
         </div>
