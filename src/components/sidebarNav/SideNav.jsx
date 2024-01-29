@@ -43,18 +43,23 @@ const SideNav = ({ open }) => {
     <div
       className={`fixed  md:relative h-screen top-0 left-0 w-64 h-full bg-primary transition-transform transform ${
         isOpen
-          ? " transition-transform transform translate-x-0"
+          ? " transition-transform transform translate-x-0 "
           : "  -translate-x-full"
-      } md:transition-transform md:transform md:translate-x-0 md:-translate-x-full"
+      } md:transition-transform md:transform md:translate-x-0 md:-translate-x-full "
 `}
       style={{
         zIndex: 9999,
       }}
     >
       <div className="  bg-primary flex flex-col  top-0 left-0 w-64  h-full ">
-        <div className="flex  items-center justify-center h-14 ">
-          <div>Logo here </div>
-          <button onClick={() => setIsOpen(false)}>on onClick</button>
+        <div className="flex  items-center  h-14 ">
+          <div className="mx-auto ">Logo here </div>
+          <button
+            className=" text-sm  md:hidden float-right  absolute left-[83%] pr-2 "
+            onClick={() => setIsOpen(false)}
+          >
+            close
+          </button>
         </div>
         <div className="overflow-y-auto  flex flex-col justify-between overflow-x-hidden flex-grow ">
           <section>
