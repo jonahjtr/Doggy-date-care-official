@@ -29,9 +29,11 @@ const SideNav = ({ open }) => {
   };
 
   useEffect(() => {
-    console.log("sldkfjklsdfldakfjdf");
     console.log(isOpen);
   }, [isOpen]);
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const handleDropDown = () => {
     setIsMenuOpen(!isMenuOpen);
