@@ -29,9 +29,15 @@ const Header = () => {
           <button onClick={handleClick} className="mx-4 md:hidden">
             ///
           </button>
-          <Link to={"/"}>
-            <h1 className="text-xl font-bold">Doggy Date Care</h1>
-          </Link>
+          {isLoggedIn ? (
+            <Link to={"/dashboard"}>
+              <h1 className="text-xl font-bold">Doggy Date Care</h1>
+            </Link>
+          ) : (
+            <Link to={"/"}>
+              <h1 className="text-xl font-bold">Doggy Date Care</h1>
+            </Link>
+          )}
         </div>
         <nav>
           {isLoggedIn == false || isLoggedIn == null ? (

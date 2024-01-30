@@ -16,6 +16,7 @@ const useDeleteAxios = async (url) => {
       throw new Error(`Request failed with status ${response.status}`);
     }
   } catch (error) {
+    console.log(error);
     console.log("response");
     throw new Error(`Request failed: ${error.message}`);
   }
