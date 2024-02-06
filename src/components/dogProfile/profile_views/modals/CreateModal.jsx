@@ -10,7 +10,6 @@ const CreateModal = (props) => {
 
   return (
     <div className="w-full h-full grid grid-cols-[25%_50%_25%]  ">
-      {/* Blurry background */}
       {isCardVisible && (
         <div className="fixed top-0 left-0 w-screen h-screen backdrop-filter backdrop-brightness-50 backdrop-blur-xl z-10"></div>
       )}

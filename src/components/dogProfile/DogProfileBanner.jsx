@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import LoadingComponent from "../utils/LoadingComponent";
 
-function Banner({ data }) {
+function Banner({ data, openModal }) {
+  const [modalStatus, setModalStatus] = useState(false);
   let outputDateOfBirth = null;
   if (data.dog_date_of_birth) {
     outputDateOfBirth = new Date(data.dog_date_of_birth).toLocaleDateString();
   }
+  const handleClick = () => {
+    openModal();
+  };
 
   return (
     <div className="relative  min-h-[150px] h-1/5">
-      {/* Banner Background */}
       <div className="w-full  h-full bg-gradient-to-b from-white to-primary flex"></div>
       {data && data.breed_info ? (
         <div className="absolute bottom-0 flex items-end  left-1/2 md:left-[18%] xl:left-[10%] transform -translate-x-1/2 translate-y-1/2 bg-primary rounded-full  w-[150px] h-[150px]   xl:w-[200px]  xl:h-[200px]">
@@ -18,7 +21,9 @@ function Banner({ data }) {
             alt="Profile Picture"
             className="rounded-full mx-auto w-full h-full"
           />
-
+          <button onClick={handleClick} className=" ml-[-20px]">
+            +
+          </button>
           <div className="     sm:ml-3   whitespace-nowrap ">
             <h1 className=" text-xl xl:text-2xl font-bold">
               {data.dog_name ? data.dog_name : "doggy name"}

@@ -14,6 +14,7 @@ const DogProfile = () => {
   const [dogPhotos, setDogPhotos] = useState([]);
   const [dogMeds, setDogMeds] = useState([]);
   const [dogFiles, setDogFiles] = useState([]);
+  const [isProfileModalopen, setIsProfileModalopen] = useState(false);
 
   const dogId = JSON.parse(localStorage.getItem("current_dog"));
   const { data, error, loading } = useGetAxios(`/dogs/${dogId}`);
@@ -27,15 +28,29 @@ const DogProfile = () => {
   if (error) {
     return <div> error occured</div>;
   }
+  const handleProfileModal = () => {
+    setIsProfileModalopen(!isProfileModalopen);
+    console.log("hello");
+  };
+  if (isProfileModalopen) {
+    return (
+      <div className="h-screen w-screen flex justify-center items-center bg-grey">
+        <div className="w-[150px] h-[150px] shadow-2xl bg-white">
+          <button onClick={handleProfileModal}>close</button>
+          <div>
+            this is where we will be doing the upload profile photo modal
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (data) {
     return (
       <div className="flex h-screen ">
         <SideNav />
         <div className="grow flex flex-col  h-screen overflow-y-auto">
           <Header />
-
-          <DogProfileBanner data={data} />
-
+          <DogProfileBanner openModal={handleProfileModal} data={data} />
           <main className="bg-purple flex flex-col xl:flex-row grow ">
             <div className=" border xl:w-2/3 flex flex-col md:flex-row bg-white">
               <section className="w-full  pt-28 md:pt-20 xl:w-1/2 flex flex-col justify-around h-full   xl:pt-28">
