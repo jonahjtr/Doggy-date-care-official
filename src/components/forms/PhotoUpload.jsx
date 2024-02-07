@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function PhotoUpload(data) {
+function PhotoUpload({ data, toggleModal }) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -50,6 +50,12 @@ function PhotoUpload(data) {
         className="bg-darkBeige  hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
       >
         Upload
+      </button>
+      <button
+        onClick={toggleModal}
+        className="bg-darkBeige  hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+      >
+        close
       </button>
     </div>
   );
