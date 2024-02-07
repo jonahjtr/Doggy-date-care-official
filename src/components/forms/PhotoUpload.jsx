@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function PhotoUpload(data) {
+function PhotoUpload({ url, toggleModal }) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -19,7 +19,7 @@ function PhotoUpload(data) {
     formData.append("file_nickname", "image");
     const accessToken = localStorage.getItem("token");
     axios
-      .post(`http://localhost:3000/dogs/${data.url}`, formData, {
+      .post(`http://localhost:3000/dogs/${url}`, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
@@ -50,6 +50,12 @@ function PhotoUpload(data) {
         className="bg-darkBeige  hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
       >
         Upload
+      </button>
+      <button
+        onClick={toggleModal}
+        className="bg-darkBeige  hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+      >
+        close
       </button>
     </div>
   );
