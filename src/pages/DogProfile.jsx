@@ -45,7 +45,10 @@ const DogProfile = () => {
     return (
       <div className="h-screen w-screen flex justify-center items-center bg-grey">
         <div className="w-[250px] h-[150px] shadow-2xl bg-white">
-          <PhotoUpload toggleModal={handleProfilePhotoModal} />
+          <PhotoUpload
+            url={`photos/profile/${dogId}`}
+            toggleModal={handleProfilePhotoModal}
+          />
         </div>
       </div>
     );
