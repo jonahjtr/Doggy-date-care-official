@@ -35,7 +35,7 @@ const MedCreate = ({ url, title }) => {
       window.location.reload();
     } catch (error) {
       console.error("Error:", error);
-      setErrorMessage("Failed to create medicine. Please try again.");
+      setErrorMessage(`Failed to create medicine. Please try again.`);
     }
   };
 
