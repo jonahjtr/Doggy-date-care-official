@@ -66,7 +66,7 @@ const Dashboard = () => {
             </section>
             <section className={`flex   flex-col mobileBP:w-1/2  `}>
               <div
-                className={` mobileBP:h-2/5 flex justify-center items-center `}
+                className={` h-[500px] mobileBP:h-2/5 flex justify-center items-center `}
               >
                 {<UpComingEvents loading={loading} events={events} />}
               </div>
