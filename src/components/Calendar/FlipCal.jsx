@@ -9,7 +9,6 @@ const FlipCal = (props) => {
 
   const handleDayClick = () => {
     setIsFlipped(!isFlipped);
-    console.log("lksadjlkdsfj");
   };
   return (
     <div className="rounded-xl max-w-[500px] mx-auto text-center ">

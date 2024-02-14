@@ -24,13 +24,9 @@ const MedCreate = ({ url, title }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("hello");
     e.preventDefault();
     try {
-      console.log(formData);
       const response = await usePostAxios(url, formData);
-
-      console.log("Response:", response);
 
       window.location.reload();
     } catch (error) {
@@ -40,18 +36,12 @@ const MedCreate = ({ url, title }) => {
   };
 
   return (
-    <div className="w-[80%] max-w-[500px]  mx-auto">
+    <div className="w-[80%] max-w-[500px] h-[500px]   mx-auto">
       <h1 className="text-3xl font-semibold mb-6 text-center">{title}</h1>
-      {errorMessage && (
-        <p className="text-red-500 mb-4 text-center">{errorMessage}</p>
-      )}
+      {errorMessage && <p className="mb-4 text-center">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
-        {/* Medicine Name */}
         <div className="mb-4">
-          <label
-            htmlFor="medicine_name"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="medicine_name" className=" font-bold ">
             Medicine Name:
           </label>
           <input
@@ -61,16 +51,12 @@ const MedCreate = ({ url, title }) => {
             name="medicine_name"
             value={formData.medicine_name}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full border rounded-lg "
           />
         </div>
 
-        {/* Start Date */}
-        <div className="mb-4">
-          <label
-            htmlFor="medicine_start_date"
-            className="block text-gray-700 font-bold mb-2"
-          >
+        <div className="mb-4 flex">
+          <label htmlFor="medicine_start_date" className="font-bold ">
             Start Date:
           </label>
           <input
@@ -80,16 +66,10 @@ const MedCreate = ({ url, title }) => {
             name="medicine_start_date"
             value={formData.medicine_start_date}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full border  rounded-lg "
           />
-        </div>
 
-        {/* End Date */}
-        <div className="mb-4">
-          <label
-            htmlFor="medicine_end_date"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="medicine_end_date" className="">
             End Date:
           </label>
           <input
@@ -99,16 +79,13 @@ const MedCreate = ({ url, title }) => {
             name="medicine_end_date"
             value={formData.medicine_end_date}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full rounded-lg"
           />
         </div>
 
         {/* Dosage */}
         <div className="mb-4">
-          <label
-            htmlFor="medicine_dosage"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="medicine_dosage" className="">
             Dosage:
           </label>
           <input
@@ -118,16 +95,13 @@ const MedCreate = ({ url, title }) => {
             name="medicine_dosage"
             value={formData.medicine_dosage}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full"
           />
         </div>
 
         {/* Instructions */}
         <div className="mb-4">
-          <label
-            htmlFor="medicine_instructions"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="medicine_instructions" className="">
             Instructions:
           </label>
           <textarea
@@ -136,17 +110,14 @@ const MedCreate = ({ url, title }) => {
             name="medicine_instructions"
             value={formData.medicine_instructions}
             onChange={handleChange}
-            rows="4"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            rows="2"
+            className="w-full "
           ></textarea>
         </div>
 
         {/* Frequency */}
         <div className="mb-4">
-          <label
-            htmlFor="medicine_frequency"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="medicine_frequency" className="">
             Frequency:
           </label>
           <input
@@ -156,16 +127,12 @@ const MedCreate = ({ url, title }) => {
             name="medicine_frequency"
             value={formData.medicine_frequency}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full "
           />
         </div>
 
-        {/* Description */}
         <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-gray-700 font-bold mb-2"
-          >
+          <label htmlFor="description" className="">
             Description:
           </label>
           <textarea
@@ -174,12 +141,11 @@ const MedCreate = ({ url, title }) => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            rows="4"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            rows="2"
+            className="w-full "
           ></textarea>
         </div>
 
-        {/* Submit Button */}
         <div className="text-center">
           <button
             type="submit"

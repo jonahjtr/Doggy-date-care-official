@@ -71,7 +71,7 @@ const Dashboard = () => {
                 {<UpComingEvents loading={loading} events={events} />}
               </div>
               <div className={`mobileBP:h-3/5 flex items-center `}>
-                <div className=" rounded-2xl bg-primary  w-4/5 h-4/5 mx-auto overflow-y-hidden">
+                <div className=" rounded-2xl bg-purple  w-4/5 h-4/5 mx-auto overflow-y-hidden">
                   <Calendar
                     dashboard={true}
                     datesList={
