@@ -27,6 +27,7 @@ const MedsViewCard = ({ medicineList, dogId, loading }) => {
   };
   const handleDelete = async (medicineId) => {
     try {
+      console.log("medicineId: ", medicineId);
       const result = await useDeleteAxios(
         `/dogs/medicine/${dogId}/${medicineId}`
       );
@@ -60,30 +61,55 @@ const MedsViewCard = ({ medicineList, dogId, loading }) => {
             </div>
           ) : (
             medicineList.map((medicine, index) => (
-              <div key={index} className="bg-white p-2 rounded shadow">
-                <h2 className="text-sm font-semibold mb-1">{medicine.name}</h2>
-                <p className="text-xs mb-1">Dosage: {medicine.dosage}</p>
-                <p className="text-xs mb-1">
-                  Start Date: {medicine.start_date}
-                </p>
-                <p className="text-xs mb-1">End Date: {medicine.end_date}</p>
-                <p className="text-xs mb-1">Frequency: {medicine.frequency}</p>
-                <p className="text-xs">Instructions: {medicine.instructions}</p>
-                <p className="text-xs">Description: {medicine.description}</p>
+              <div
+                key={index}
+                className="bg-greyp-2 flex rounded border shadow"
+              >
+                <div className="bg-purple w-4/5">
+                  <h2 className="text-sm font-semibold mb-1">
+                    {medicine.name}
+                  </h2>
+                  <p className="text-xs mb-1">Dosage: {medicine.dosage}</p>
 
-                <button onClick={() => handleEditClick(medicine)}>Edit</button>
-                <div></div>
+                  <p className="text-xs mb-1">
+                    Frequency: {medicine.frequency}
+                  </p>
+                  <p className="text-xs">
+                    Instructions: {medicine.instructions}
+                  </p>
+                  <p className="text-xs">Description: {medicine.description}</p>
+                </div>
+                <div className="border w-1/5 bg-grey">
+                  <p className="text-xs mb-1">
+                    Start Date: {medicine.start_date}
+                  </p>
+                  <p className="text-xs mb-1">End Date: {medicine.end_date}</p>
+                  <div className="bg-white flex justify-between">
+                    <button
+                      className="border"
+                      onClick={() => handleEditClick(medicine)}
+                    >
+                      Edit
+                    </button>
 
-                {confirmDelete ? (
-                  <button
-                    ref={deleteRef}
-                    onClick={() => handleDelete(medicine.id)}
-                  >
-                    confirm delete
-                  </button>
-                ) : (
-                  <button onClick={() => setConfirmDelete(true)}>delete</button>
-                )}
+                    {confirmDelete ? (
+                      <button
+                        className="bg-purple"
+                        ref={deleteRef}
+                        onClick={() => handleDelete(medicine.id)}
+                      >
+                        confirm delete
+                      </button>
+                    ) : (
+                      <button
+                        className="border"
+                        onClick={() => setConfirmDelete(true)}
+                      >
+                        delete
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             ))
           )}

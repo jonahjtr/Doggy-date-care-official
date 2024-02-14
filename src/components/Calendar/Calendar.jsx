@@ -132,7 +132,7 @@ const Calendar = ({ datesList, dashboard }) => {
         <div className=" w-full   h-full">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <div className="p-2 h-full">
-              <div className="flex items-center mb-2">
+              <div className="flex items-center  mb-2">
                 <CalMonthYear
                   selectedDate={selectedDate}
                   handleMonthChange={handleMonthChange}

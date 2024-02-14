@@ -23,7 +23,10 @@ const UpComingEvents = ({ events, loading }) => {
   console.log("new events", events);
   return (
     <div className="w-4/5 rounded-2xl bg-grey h-2/3">
-      <div className=" h-1/6  px-3 w-full"> upcoming events</div>
+      <div className=" h-1/6 text-2xl font-bold mx-auto  px-3 w-fit">
+        {" "}
+        upcoming events
+      </div>
       <div className=" h-5/6 w-full p-2 pt-1">
         {loading ? (
           <LoadingComponent />
