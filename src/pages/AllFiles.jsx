@@ -22,12 +22,12 @@ const AllFiles = () => {
     <div className="flex ">
       <SideNav />
       <div className="grow">
-        <div className=" mobileBP:h-[calc(100vh-_70px)] ">
+        <div className=" mobileBP:h-[calc(100vh-_70px)] bg-white ">
           <Header />
-          <div className="h-1/2 overflow-y-hidden flex flex-wrap w-1/2 mx-auto bg-grey ">
+          <div className=" h-[calc(100vh-_56.5px)]  overflow-y-auto  ">
             {fileList.map((file, index) => {
               return (
-                <div className="w-[600px] border  " key={index}>
+                <div className="w-[400px]  h-[50px] border  " key={index}>
                   <p>{file.file_nickname ? file.file_nickname : "file name"}</p>
                   <p>{file.upload_date ? file.upload_date : "upload date"}</p>
                 </div>

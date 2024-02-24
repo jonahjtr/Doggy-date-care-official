@@ -22,11 +22,10 @@ const AllPhotos = () => {
     <div className="flex ">
       <SideNav />
       <div className="grow">
-        <div className=" mobileBP:h-[calc(100vh-_70px)] ">
+        <div className=" mobileBP:h-[calc(100vh-_70px)] bg-white ">
           <Header />
-          <div className="h-1/2 overflow-y-hidden flex flex-wrap w-1/2 mx-auto bg-grey ">
+          <div className=" h-[calc(100vh-_56.5px)] flex wrap ">
             {photosList.map((photo, index) => {
-              if (index < 5) return <div key={index}>bad image url</div>;
               return (
                 <div className="" key={index}>
                   <img

@@ -22,12 +22,12 @@ const AllMeds = () => {
     <div className="flex ">
       <SideNav />
       <div className="grow">
-        <div className=" mobileBP:h-[calc(100vh-_70px)] ">
+        <div className=" mobileBP:h-[calc(100vh-_70px)] bg-white ">
           <Header />
-          <div className="h-1/2 overflow-y-hidden flex flex-wrap w-1/2 mx-auto bg-grey ">
+          <div className=" h-[calc(100vh-_56.5px)]  overflow-y-auto  ">
             {medsList.map((med, index) => {
               return (
-                <div className="w-[600px] border  " key={index}>
+                <div className=" w-[400px] border h-fit  " key={index}>
                   <p>{med.name}</p>
                   <p>{med.instructions}</p>
                   <p>{med.description ? med.description : "description"}</p>
