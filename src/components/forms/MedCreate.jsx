@@ -83,7 +83,6 @@ const MedCreate = ({ url, title }) => {
           />
         </div>
 
-        {/* Dosage */}
         <div className="mb-4">
           <label htmlFor="medicine_dosage" className="">
             Dosage:
@@ -99,7 +98,6 @@ const MedCreate = ({ url, title }) => {
           />
         </div>
 
-        {/* Instructions */}
         <div className="mb-4">
           <label htmlFor="medicine_instructions" className="">
             Instructions:
@@ -115,7 +113,6 @@ const MedCreate = ({ url, title }) => {
           ></textarea>
         </div>
 
-        {/* Frequency */}
         <div className="mb-4">
           <label htmlFor="medicine_frequency" className="">
             Frequency:

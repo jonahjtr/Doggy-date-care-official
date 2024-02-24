@@ -11,7 +11,7 @@ import Calendar from "../components/Calendar/Calendar";
 import PhotoViewCard from "../components/dogProfile/profile_views/PhotoViewCard";
 import FileViewCard from "../components/dogProfile/profile_views/FileViewCard";
 import MedsViewCard from "../components/dogProfile/profile_views/MedsViewCard";
-import NotesViewCard from "../components/dogProfile/profile_views/NotesViewCard";
+import EventCard from "../components/dogProfile/profile_views/EventCards";
 
 const DogProfile = () => {
   const [dateEvents, setDateEvents] = useState([]);
@@ -40,7 +40,7 @@ const DogProfile = () => {
   const handleProfilePhotoModal = () => {
     setIsProfilePhotoModalopen(!isProfilePhotoModalopen);
   };
-
+  console.log("date events", dateEvents);
   if (isProfilePhotoModalopen) {
     return (
       <div className="h-screen w-screen flex justify-center items-center bg-grey">
@@ -87,7 +87,7 @@ const DogProfile = () => {
                   />
                 </div>
                 <div className="h-[40vh] md:h-[48%]  mb-6 min-h-[250px]  w-full">
-                  <NotesViewCard loading={loading} dogId={dogId} />
+                  <EventCard loading={loading} datesList={dateEvents} />
                 </div>
               </section>
             </div>

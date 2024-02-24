@@ -26,7 +26,7 @@ const FileViewCard = ({ fileList, dogId, loading }) => {
   useClickOutside(componentRef, () => {
     setConfirmDelete(false);
   });
-  const isFileListValid = Array.isArray(fileList) && fileList.length > 0;
+  const isFileListValid = Array.isArray(fileList) && fileList.length >= 0;
 
   return (
     <section
