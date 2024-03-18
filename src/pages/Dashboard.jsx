@@ -38,7 +38,7 @@ const Dashboard = () => {
         <div className={`min-h-screen`}>
           <Header />
           <main
-            className={`flex flex-col mobileBP:flex-row bg-white  mobileBP:h-[calc(100vh_-_70px)]`}
+            className={`flex flex-col mobileBP:flex-row bg-white  mobileBP:h-[calc(100dvh_-_70px)]`}
           >
             <section className={`flex flex-col mobileBP:w-1/2 `}>
               <div

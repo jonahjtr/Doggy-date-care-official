@@ -13,11 +13,11 @@ const Header = () => {
     useLogout();
   };
 
-  useEffect(() => {
-    if (isLoggedIn === false) {
-      window.location.replace("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLoggedIn === false) {
+  //     window.location.replace("/login");
+  //   }
+  // }, []);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };

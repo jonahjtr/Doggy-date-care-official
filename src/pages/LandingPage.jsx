@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import AboutSection from "../landingPage/AboutSection";
 import DescriptionSection from "../landingPage/DescriptionSection";
 import BenefitsSection from "../landingPage/BenefitsSection";
+import Footer from "../components/Footer/Footer";
 import useCheckToken from "../components/utils/useCheckToken";
 
 function LandingPage() {
@@ -18,8 +19,9 @@ function LandingPage() {
     <div>
       <Header />
       <AboutSection />
-      <DescriptionSection />
       <BenefitsSection />
+      <DescriptionSection />
+      <Footer />
     </div>
   );
 }

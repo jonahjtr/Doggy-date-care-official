@@ -5,9 +5,12 @@
 
 # test user1
 
-username: testUser1
-email: testUser1@gmail.com
-password: testUser1
+username:
+testUser1
+email:
+testUser1@gmail.com
+password:
+testUser1
 
 # test user2
 
