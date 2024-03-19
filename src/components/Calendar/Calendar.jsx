@@ -8,7 +8,7 @@ import CalMonthYear from "./CalMonthYear";
 import CalDays from "./CalDays";
 import FlipCal from "./FlipCal";
 
-const Calendar = ({ datesList, dashboard }) => {
+const Calendar = ({ datesList, dashboard, type }) => {
   const currentDate = new Date();
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [highlightedDays, setHighlightedDays] = useState([]);
@@ -132,14 +132,13 @@ const Calendar = ({ datesList, dashboard }) => {
         <div className=" w-full   h-full">
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <div className="p-2 h-full">
-              <div className="flex items-center  mb-2">
-                <CalMonthYear
-                  selectedDate={selectedDate}
-                  handleMonthChange={handleMonthChange}
-                  handleYearChange={handleYearChange}
-                />
-              </div>
+              <CalMonthYear
+                selectedDate={selectedDate}
+                handleMonthChange={handleMonthChange}
+                handleYearChange={handleYearChange}
+              />
               <CalDays
+                type={type}
                 selectedDate={selectedDate}
                 daysInMonth={daysInMonth}
                 handleDateChange={handleDateChange}
@@ -150,13 +149,15 @@ const Calendar = ({ datesList, dashboard }) => {
             </div>
           </LocalizationProvider>
         </div>
-        <div
-          className={` ${
-            dashboard ? "" : " border h-full mx-auto pt-5 "
-          } w-full border-l shadow  md:w-4/5 md:min-h-[180px] flex items-center  overflow-y-auto `}
-        >
-          <CalEvents selectedDateEvents={selectedDateEvents} />
-        </div>
+        {type != "main" && (
+          <div
+            className={` ${dashboard ? "" : " border h-full mx-auto pt-5 "}  ${
+              type === "main" ? "w-1/3" : " w-full"
+            }  border-l shadow  md:w-4/5 md:min-h-[180px] flex items-center  overflow-y-auto `}
+          >
+            <CalEvents selectedDateEvents={selectedDateEvents} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const months = [
 const CalMonthYear = (props) => {
   const { selectedDate, handleMonthChange, handleYearChange } = props;
   return (
-    <div className=" flex justify-center items-center h-[50px] w-full">
+    <div className=" h-[50px] ">
       <select
         className="mr-2 text-xl font-medium bg-grey text-white bg-opacity-0"
         value={selectedDate.getMonth()}

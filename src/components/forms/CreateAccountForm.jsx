@@ -20,7 +20,6 @@ const CreateAccountForm = () => {
       ...allValues,
       [e.target.name]: e.target.value,
     });
-    console.log(allValues);
   };
 
   const handleStateChange = (selectedState) => {
@@ -40,9 +39,8 @@ const CreateAccountForm = () => {
         allValues
       );
       console.log(response);
-      if (response.status == 200) {
+      if (response.status == 200 || 201) {
         setIsLoading(false);
-
         window.location.href = "/login";
       }
     } catch (error) {
@@ -55,151 +53,234 @@ const CreateAccountForm = () => {
   };
   if (isLoading) return <LoadingComponent />;
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Create Account</h2>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <form>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              First name:
-            </label>
-            <input
-              type="text"
-              className="mt-1 p-2 w-full border rounded-md"
-              value={allValues.first_name}
-              onChange={changeHandler}
-              name="first_name"
-            />
+    <section class="bg-gray-50 dark:bg-gray-900">
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <Link
+          href="#"
+          class="flex items-center mb-6 text-2xl font-semibold text-gray-900 "
+        >
+          Doggy Date Care
+        </Link>
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+              Create an account
+            </h1>
+            {errorMessage && (
+              <p className="text-red-500 mb-4">{errorMessage}</p>
+            )}
+            <form class="space-y-4 md:space-y-6" action="#">
+              <div>
+                <label
+                  for="username"
+                  class="block mb-2 text-sm font-medium text-gray-900 "
+                >
+                  Username:
+                </label>
+                <input
+                  type="username"
+                  name="username"
+                  value={allValues.username}
+                  onChange={changeHandler}
+                  id="username"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                  placeholder="bestDoggy13"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block mb-2 text-sm font-medium text-gray-900 "
+                >
+                  Your email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={allValues.email}
+                  onChange={changeHandler}
+                  id="email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                  placeholder="name@company.com"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="password"
+                  class="block mb-2 text-sm font-medium text-gray-900 "
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={allValues.password}
+                  onChange={changeHandler}
+                  id="password"
+                  placeholder="••••••••"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                  required=""
+                />
+              </div>
+              <div class="w-full flex flex-wrap">
+                <div class="w-1/2 pr-2">
+                  <label
+                    for="first_name"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    First name
+                  </label>
+                  <input
+                    type="text"
+                    name="first_name"
+                    value={allValues.first_name}
+                    onChange={changeHandler}
+                    id="first_name"
+                    placeholder="John"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    required=""
+                  />
+                </div>
+                <div class="w-1/2 pl-2">
+                  <label
+                    for="last_name"
+                    class="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Last name
+                  </label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    value={allValues.last_name}
+                    onChange={changeHandler}
+                    id="last_name"
+                    placeholder="Smith"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    required=""
+                  />
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input
+                    id="terms"
+                    aria-describedby="terms"
+                    type="checkbox"
+                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300  "
+                    required=""
+                  />
+                </div>
+                <div class="ml-3 text-sm">
+                  <label class="font-light text-gray-500 ">
+                    I accept the{" "}
+                    <Link class="font-medium text-primary-600 hover:underline ">
+                      Terms and Conditions
+                    </Link>
+                  </label>
+                </div>
+              </div>
+              <button
+                onClick={handleSubmit}
+                type="submit"
+                class="w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  "
+              >
+                Create an account
+              </button>
+              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Login here
+                </Link>
+              </p>
+            </form>
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Last name:
-            </label>
-            <input
-              type="text"
-              className="mt-1 p-2 w-full border rounded-md"
-              value={allValues.last_name}
-              onChange={changeHandler}
-              name="last_name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Username:
-            </label>
-            <input
-              className="mt-1 p-2 w-full border rounded-md"
-              type="text"
-              value={allValues.username}
-              onChange={changeHandler}
-              name="username"
-              placeholder="Enter a username"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Email:
-            </label>
-            <input
-              type="email"
-              className="mt-1 p-2 w-full border rounded-md"
-              value={allValues.email}
-              onChange={changeHandler}
-              name="email"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Password:
-            </label>
-            <input
-              type="password"
-              className="mt-1 p-2 w-full border rounded-md"
-              value={allValues.password}
-              onChange={changeHandler}
-              name="password"
-            />
-          </div>
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="bg-green-500 text-black px-4 py-2 rounded-md hover:bg-green-600"
-          >
-            Create Account
-          </button>
-        </form>
+        </div>
       </div>
-      <Link to={"/login"}> login page here</Link>
-    </div>
+    </section>
   );
 };
 
 export default CreateAccountForm;
 
-// <div className="mb-4">
-//   <label className="block text-sm font-medium text-gray-600">
-//     Date of Birth:
-//   </label>
-//   <input
-//     type="date"
-//     className="mt-1 p-2 w-full border rounded-md"
-//     value={allValues.date_of_birth}
-//     onChange={changeHandler}
-//     name="date_of_birth"
-//   />
-// </div>
-// <div className="mb-4">
-//   <label className="block text-sm font-medium text-gray-600">
-//     Phone Number:
-//   </label>
-//   <input
-//     type="tel"
-//     className="mt-1 p-2 w-full border rounded-md"
-//     value={allValues.phone_number}
-//     onChange={changeHandler}
-//     name="phone_number"
-//   />
-// </div>
-// <div className="mb-4">
-//   <label className="block text-sm font-medium text-gray-600">
-//     City:
-//   </label>
-//   <input
-//     type="text"
-//     className="mt-1 p-2 w-full border rounded-md"
-//     value={allValues.city}
-//     onChange={changeHandler}
-//     name="city"
-//   />
-// </div>
-
-// <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-//   <label
-//     className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-//     htmlFor="grid-state"
-//   >
-//     State
-//   </label>
-//   <div className="relative">
-//     <select
-//       className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-//       id="grid-state"
-//       value={allValues.state}
-//       onChange={(e) => handleStateChange(e.target.value)}
-//     >
-//       <option>New Mexico</option>
-//       <option>Missouri</option>
-//       <option>Texas</option>
-//     </select>
-//     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-//       <svg
-//         className="fill-current h-4 w-4"
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox="0 0 20 20"
+// <div className="min-h-screen flex items-center justify-center bg-gray-50">
+//   <div className="bg-white p-8 rounded shadow-md w-96">
+//     <h2 className="text-2xl font-semibold mb-4">Create Account</h2>
+//     {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+//     <form>
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">
+//           First name:
+//         </label>
+//         <input
+//           type="text"
+//           className="mt-1 p-2 w-full border rounded-md"
+//           value={allValues.first_name}
+//           onChange={changeHandler}
+//           name="first_name"
+//         />
+//       </div>
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">
+//           Last name:
+//         </label>
+//         <input
+//           type="text"
+//           className="mt-1 p-2 w-full border rounded-md"
+//           value={allValues.last_name}
+//           onChange={changeHandler}
+//           name="last_name"
+//         />
+//       </div>
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">
+//           Username:
+//         </label>
+//         <input
+//           className="mt-1 p-2 w-full border rounded-md"
+//           type="text"
+//           value={allValues.username}
+//           onChange={changeHandler}
+//           name="username"
+//           placeholder="Enter a username"
+//         />
+//       </div>
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">
+//           Email:
+//         </label>
+//         <input
+//           type="email"
+//           className="mt-1 p-2 w-full border rounded-md"
+//           value={allValues.email}
+//           onChange={changeHandler}
+//           name="email"
+//         />
+//       </div>
+//       <div className="mb-4">
+//         <label className="block text-sm font-medium text-gray-600">
+//           Password:
+//         </label>
+//         <input
+//           type="password"
+//           className="mt-1 p-2 w-full border rounded-md"
+//           value={allValues.password}
+//           onChange={changeHandler}
+//           name="password"
+//         />
+//       </div>
+//       <button
+//         type="button"
+//         onClick={handleSubmit}
+//         className="bg-green-500 text-black px-4 py-2 rounded-md hover:bg-green-600"
 //       >
-//         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-//       </svg>
-//     </div>
+//         Create Account
+//       </button>
+//     </form>
 //   </div>
-// </div>;
+//   <Link to={"/login"}> login page here</Link>
+// </div>

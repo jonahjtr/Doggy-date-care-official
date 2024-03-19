@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import LoginForm from "../components/forms/LoginForm";
+import Header from "../components/Header";
 import useCheckToken from "../components/utils/useCheckToken";
 const Login = () => {
   const isLoading = useCheckToken();
@@ -10,10 +11,8 @@ const Login = () => {
     }
   }, []);
   return (
-    <div className="flex justify-center">
-      <button className="w-[100px] h-[30px] border border-black">
-        logout here
-      </button>
+    <div className="">
+      <Header />
       <LoginForm />
     </div>
   );

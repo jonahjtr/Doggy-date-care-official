@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useGetAxios from "../hooks/axios/useGetAxios";
 import SideNav from "../components/sidebarNav/SideNav";
 import UpComingEvents from "../components/dashboard/UpComingEvents";
@@ -48,7 +49,18 @@ const Dashboard = () => {
                   hello, welcome back
                 </div>
               </div>
-              <div className={`mobileBP:h-3/5 flex items-center `}>
+              <div className={`mobileBP:h-3/5 flex flex-col items-center `}>
+                {" "}
+                <div className="w-full h-[10px] flex justify-end">
+                  <Link to="/create-dog">
+                    <button
+                      type="button"
+                      class="px-3 py-2 mx-2 text-xs text-white font-medium text-center  bg-primary rounded-lg hover:bg-accent focus:ring-4 focus:outline-none focus:ring-blue-300 "
+                    >
+                      add another doggy +
+                    </button>
+                  </Link>
+                </div>
                 <div className="w-4/5 rounded-2xl mobileBP:h-4/5 max-h-[50vh]  mx-auto no-scrollbar overflow-y-auto">
                   {dogs.length == 0 ? (
                     <div> no dogs </div>

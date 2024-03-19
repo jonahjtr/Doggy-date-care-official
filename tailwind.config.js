@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
+  ],
   theme: {
     screens: {
       xs: "400px",
@@ -27,6 +31,7 @@ export default {
       white: "#ffffff",
       beige: "#FEE8B0",
       actWhite: "#e6ebe0",
+      "cyan-700": "#7C9070",
       // white: "#e6ebe0", //background greenish white
     },
     extend: {
@@ -41,5 +46,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };

@@ -8,6 +8,7 @@ const CalDays = (props) => {
     handleDateChange,
     highlightedDays,
     onDayClick,
+    type,
   } = props;
 
   const firstDayOfMonth = new Date(
@@ -15,7 +16,7 @@ const CalDays = (props) => {
     selectedDate.getMonth(),
     1
   );
-  const startingDay = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+  const startingDay = firstDayOfMonth.getDay();
 
   const lastDayOfPrevMonth = new Date(
     selectedDate.getFullYear(),
@@ -37,7 +38,11 @@ const CalDays = (props) => {
   };
 
   return (
-    <div className="grid  grid-cols-7 gap-1 ">
+    <div
+      className={`grid  w-full ${
+        type === "main" && "h-[80dvh] aspect-square"
+      } pb-12 grid-cols-7 gap-1`}
+    >
       {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
         <div key={day} className="font-semibold">
           {day}
@@ -47,7 +52,9 @@ const CalDays = (props) => {
       {Array.from({ length: startingDay }, (_, i) => (
         <div
           key={`prev-month-${i}`}
-          className=" h-[5vh] flex cursor-pointer opacity-50 text-gray-400"
+          className={` ${
+            type === "main" ? "h-[10vh]" : " h-[5vh]"
+          }  flex cursor-pointer opacity-50 text-gray-400 `}
           onClick={() =>
             handleDayClick(
               new Date(
@@ -67,7 +74,9 @@ const CalDays = (props) => {
       {Array.from({ length: daysInMonth }, (_, i) => (
         <div
           key={i + 1}
-          className={` h-[5vh] flex cursor-pointer ${
+          className={` ${
+            type === "main" ? "h-[10vh]" : " h-[5vh]"
+          } flex cursor-pointer ${
             selectedDate.getDate() === i + 1 &&
             selectedDate.getMonth() === selectedDate.getMonth() &&
             selectedDate.getFullYear() === selectedDate.getFullYear()
@@ -97,7 +106,9 @@ const CalDays = (props) => {
         (_, i) => (
           <div
             key={`next-month-${i}`}
-            className=" opacity-50 h-[5vh] flex cursor-pointer text-gray-400"
+            className={`  ${
+              type === "main" ? "h-[10vh]" : " h-[5vh]"
+            } opacity-50 flex cursor-pointer text-gray-400`}
             onClick={() =>
               handleDayClick(
                 new Date(

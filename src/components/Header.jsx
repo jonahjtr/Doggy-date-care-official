@@ -13,17 +13,12 @@ const Header = () => {
     useLogout();
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn === false) {
-  //     window.location.replace("/login");
-  //   }
-  // }, []);
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className="bg-white  h-[70px] max-h-[8vh]   border py-4">
+    <header className="bg-white  h-[70px] max-h-[8vh]    py-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex justify-start items-center">
           <button onClick={handleClick} className="mx-4 md:hidden">
